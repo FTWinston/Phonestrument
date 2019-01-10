@@ -14,7 +14,7 @@
     flex-wrap: wrap;
     max-height: 100vh;
     align-content: space-between;
-    margin-top: 8vh;
+    margin-top: 3vh;
 }
 
 .player__note {
@@ -30,6 +30,10 @@
     display: grid;
     justify-content: center;
     align-items: center;
+}
+
+.player__note--active {
+    color: red;
 }
 
 .player__back {

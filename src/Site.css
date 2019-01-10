@@ -18,6 +18,12 @@
     color: white;
 }
 
+.site__links {
+    display: flex;
+    justify-content: space-around;
+    width: 16em;
+}
+
 .site__link {
     color: #61dafb;
 }

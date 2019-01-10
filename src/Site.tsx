@@ -21,22 +21,24 @@ export class Site extends Component<IProps, {}> {
                         Use your phone like a musical instrument!
                     </p>
 
-                    <a
-                        className="site__link"
-                        href="https://reactjs.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Learn how
-                    </a>
-                    
-                    <a
-                        className="site__link"
-                        href="#"
-                        onClick={playClicked}
-                    >
-                        Play now
-                    </a>
+                    <div className="site__links">
+                        <a
+                            className="site__link"
+                            href="https://reactjs.org"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Learn how
+                        </a>
+                        
+                        <a
+                            className="site__link"
+                            href="#"
+                            onClick={playClicked}
+                        >
+                            Play now
+                        </a>
+                    </div>
                 </header>
             </div>
         );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NoteButton } from './NoteButton';
 import { INote } from './Notes';
 import './Player.css';
+import { Audio } from './Audio';
 
 interface IProps {
     exit: () => void;
@@ -9,6 +10,8 @@ interface IProps {
 }
 
 export class Player extends Component<IProps, {}> {
+    private audio = new Audio();
+
     componentDidMount() {
         if (!(document as any).fullscreenElement) {
             document.documentElement.requestFullscreen();
@@ -16,6 +19,8 @@ export class Player extends Component<IProps, {}> {
     }
 
     componentWillUnmount() {
+        this.audio.stopAll();
+
         if (document.exitFullscreen && (document as any).fullscreenElement) {
             document.exitFullscreen();
         }
@@ -27,13 +32,18 @@ export class Player extends Component<IProps, {}> {
             this.props.exit();
         };
 
-        const notes = this.props.notes.map((note, index) =>
-            <NoteButton
+        const notes = this.props.notes.map((note, index) => {
+            const start = () => this.audio.start(note.frequency);
+            const stop = () => this.audio.stop(note.frequency);
+
+            return <NoteButton
                 key={index}
-                pitch={note.pitch}
+                keycode={index + 49}
                 text={note.name}
+                start={start}
+                stop={stop}
             />
-        );
+        });
 
         return (
             <div className="player">
