@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 interface IProps {
     back: () => void;
+    flip: boolean;
 }
 
 export class Help extends Component<IProps, {}> {
@@ -10,6 +11,8 @@ export class Help extends Component<IProps, {}> {
             e.preventDefault();
             this.props.back();
         };
+
+        const mouthEdge = this.props.flip ? 'top' : 'bottom';
 
         return (
             <div className="site site--help">
@@ -23,7 +26,7 @@ export class Help extends Component<IProps, {}> {
                     To play your phone properly, follow these instructions after you click <em>play</em>...
                     <ol className="site__help">
                         <li>Hold your phone with the screen facing upwards.</li>
-                        <li>Press the bottom edge of the phone against your lips.</li>
+                        <li>Press the {mouthEdge} edge of the phone against your lips.</li>
                         <li>Rest the phone on your thumbs, with the fingers of each hand along the edges of the phone, so they can all touch the screen.</li>
                         <li>Push keys and make music!</li>
                     </ol>

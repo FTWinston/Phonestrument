@@ -9,7 +9,12 @@ interface IState {
     helping: boolean;
     scale: IScale;
     volume: number;
+    flip: boolean;
 }
+
+const scaleVarName = 'scale';
+const volumeVarName = 'volume';
+const flipVarName = 'flip';
 
 class App extends Component<{}, IState> {
     constructor(props: {}) {
@@ -18,7 +23,7 @@ class App extends Component<{}, IState> {
         // load saved settings, if present
         let scale = scales[0];
 
-        const savedScale = sessionStorage.getItem('scale');
+        const savedScale = sessionStorage.getItem(scaleVarName);
         if (savedScale !== null) {
             const match = scales.filter(s => s.name === savedScale);
             if (match.length > 0) {
@@ -27,7 +32,7 @@ class App extends Component<{}, IState> {
         }
 
         let vol = 0.1;
-        const savedVol = sessionStorage.getItem('volume');
+        const savedVol = sessionStorage.getItem(volumeVarName);
         if (savedVol !== null) {
             const value = parseFloat(savedVol);
             if (value >= 0 && value <= 1) {
@@ -35,11 +40,17 @@ class App extends Component<{}, IState> {
             }
         }
 
+        let flip = false;
+        if (sessionStorage.getItem(flipVarName) === '1') {
+            flip = true;
+        }
+
         this.state = {
             playing: false,
             helping: false,
             scale: scale,
             volume: vol,
+            flip: flip,
         };
     }
 
@@ -49,6 +60,7 @@ class App extends Component<{}, IState> {
 
             return <Help
                 back={back}
+                flip={this.state.flip}
             />
         }
         else if (this.state.playing) {
@@ -58,6 +70,7 @@ class App extends Component<{}, IState> {
                 exit={exit}
                 notes={this.state.scale.notes}
                 volume={this.state.volume}
+                flip={this.state.flip}
             />
         }
         else {
@@ -65,13 +78,18 @@ class App extends Component<{}, IState> {
             const help = () => this.setState({ playing: false, helping: true });
 
             const setScale = (scale: IScale) => {
-                sessionStorage.setItem('scale', scale.name);
+                sessionStorage.setItem(scaleVarName, scale.name);
                 this.setState({ scale: scale });
             };
 
             const setVolume = (vol: number) => {
-                sessionStorage.setItem('volume', vol.toString());
+                sessionStorage.setItem(volumeVarName, vol.toString());
                 this.setState({ volume: vol });
+            };
+
+            const setFlip = (flip: boolean) => {
+                sessionStorage.setItem(flipVarName, flip ? '1' : '0');
+                this.setState({ flip: flip });
             };
 
             return <Site
@@ -83,6 +101,9 @@ class App extends Component<{}, IState> {
 
                 volume={this.state.volume}
                 setVolume={setVolume}
+
+                flip={this.state.flip}
+                setFlip={setFlip}
             />
         }
     }

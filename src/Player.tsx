@@ -8,6 +8,7 @@ interface IProps {
     exit: () => void;
     notes: INote[];
     volume: number;
+    flip: boolean;
 }
 
 export class Player extends Component<IProps, {}> {
@@ -55,8 +56,12 @@ export class Player extends Component<IProps, {}> {
             />
         });
 
+        const classes = this.props.flip
+            ? 'player player--flipped'
+            : 'player';
+
         return (
-            <div className="player">
+            <div className={classes}>
                 <div className="player__notes">
                     {notes}
                 </div>

@@ -12,6 +12,9 @@ interface IProps {
 
     volume: number;
     setVolume: (vol: number) => void;
+
+    flip: boolean;
+    setFlip: (flip: boolean) => void;
 }
 
 export class Site extends Component<IProps, {}> {
@@ -30,6 +33,7 @@ export class Site extends Component<IProps, {}> {
         const scaleOptions = scales.map((scale, index) => <option key={index} value={index.toString()}>{scale.name}</option>);
         const selectScale = (e: React.ChangeEvent<HTMLSelectElement>) => this.props.selectScale(scales[e.target.selectedIndex]);
         const setVolume = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setVolume(parseFloat(e.target.value));
+        const setFlip = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setFlip(e.target.checked);
 
         return (
             <div className="site">
@@ -81,6 +85,16 @@ export class Site extends Component<IProps, {}> {
                             step="0.025"
                             value={this.props.volume}
                             onChange={setVolume}
+                        />
+                    </label>
+
+                    <label className="site__option">
+                        <span className="site__label">Flip screen</span>
+                        <input
+                            className="site__value"
+                            type="checkbox"
+                            checked={this.props.flip}
+                            onChange={setFlip}
                         />
                     </label>
                 </div>
