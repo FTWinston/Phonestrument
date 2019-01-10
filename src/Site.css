@@ -1,5 +1,13 @@
 .site {
+    color: white;
+    background-color: #282c34;
+    min-height: 100vh;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
 }
 
 .site__logo {
@@ -8,14 +16,15 @@
 }
 
 .site__header {
-    background-color: #282c34;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
+    font-weight: 450;
+}
+
+.site__help {
+    text-align: left;
+}
+
+.site__help li + li {
+    margin-top: 0.5em;
 }
 
 .site__links {
@@ -26,6 +35,10 @@
 
 .site__link {
     color: #61dafb;
+}
+
+.site__options {
+    margin-top: 1em;
 }
 
 @keyframes App-logo-spin {

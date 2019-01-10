@@ -40,6 +40,7 @@ export class Player extends Component<IProps, {}> {
                 key={index}
                 keycode={index + 49}
                 text={note.name}
+                octave={note.octave}
                 start={start}
                 stop={stop}
             />

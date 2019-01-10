@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 
 interface IProps {
     text: string;
+    octave: number;
     start: () => void;
     stop: () => void;
     keycode: number;
@@ -73,7 +74,7 @@ export class NoteButton extends PureComponent<IProps, IState> {
                 onTouchEnd={touchEnd}
                 onTouchCancel={touchEnd}
             >
-                {this.props.text}
+                {this.props.text}<sub>{this.props.octave}</sub>
             </div>
         );
     }

@@ -5,12 +5,18 @@ import './Site.css';
 
 interface IProps {
     play: () => void;
+    help: () => void;
     selectedScale: IScale;
     selectScale: (scale: IScale) => void;
 }
 
 export class Site extends Component<IProps, {}> {
     render() {
+        const helpClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            e.preventDefault();
+            this.props.help();
+        };
+
         const playClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault();
             this.props.play();
@@ -27,26 +33,27 @@ export class Site extends Component<IProps, {}> {
                     <p>
                         Use your phone like a musical instrument!
                     </p>
+                </header>
 
-                    <div className="site__links">
-                        <a
-                            className="site__link"
-                            href="https://reactjs.org"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
-                            Learn how
-                        </a>
-                        
-                        <a
-                            className="site__link"
-                            href="#"
-                            onClick={playClicked}
-                        >
-                            Play now
-                        </a>
-                    </div>
+                <div className="site__links">
+                    <a
+                        className="site__link"
+                        href="#"
+                        onClick={helpClicked}
+                    >
+                        Learn how
+                    </a>
+                    
+                    <a
+                        className="site__link"
+                        href="#"
+                        onClick={playClicked}
+                    >
+                        Play now
+                    </a>
+                </div>
 
+                <div className="site__options">
                     <select
                         className="site__scale"
                         value={selectedScaleIndex.toString()}
@@ -54,7 +61,7 @@ export class Site extends Component<IProps, {}> {
                     >
                         {scaleOptions}
                     </select>
-                </header>
+                </div>
             </div>
         );
     }
