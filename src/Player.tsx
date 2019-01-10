@@ -45,6 +45,8 @@ export class Player extends Component<IProps, {}> {
         const notes = this.props.notes.map((note, index) => {
             const start = () => this.audio.start(note.frequency);
             const stop = () => this.audio.stop(note.frequency);
+        
+            const left = index < 4;
 
             return <NoteButton
                 key={index}
@@ -53,6 +55,7 @@ export class Player extends Component<IProps, {}> {
                 octave={note.octave}
                 start={start}
                 stop={stop}
+                isLeft={left}
             />
         });
 

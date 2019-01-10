@@ -3,6 +3,8 @@ import React, { PureComponent } from 'react';
 interface IProps {
     text: string;
     octave: number;
+    
+    isLeft: boolean;
     start: () => void;
     stop: () => void;
     keycode: number;
@@ -63,9 +65,13 @@ export class NoteButton extends PureComponent<IProps, IState> {
             this.props.stop();
         };
 
-        const classes = this.state.active
+        let classes = this.state.active
             ? 'player__note player__note--active'
-            : 'player__note'
+            : 'player__note';
+
+        classes += this.props.isLeft
+            ? ' player__note--left'
+            : ' player__note--right'
 
         return (
             <div

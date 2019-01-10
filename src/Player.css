@@ -41,6 +41,16 @@
     color: red;
 }
 
+.player__note--left {
+    border-top-right-radius: 3vh;
+    border-bottom-right-radius: 3vh;
+}
+
+.player__note--right {
+    border-top-left-radius: 3vh;
+    border-bottom-left-radius: 3vh;
+}
+
 .player__back {
     color: #ccc;
     position: absolute;
