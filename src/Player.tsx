@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NoteButton } from './NoteButton';
+import { PlayerButton, ButtonType } from './PlayerButton';
 import { INote } from './Notes';
 import './Player.css';
 import { Audio } from './Audio';
@@ -50,8 +50,11 @@ export class Player extends Component<IProps, {}> {
         const notes = this.props.notes.map((note, index) => {
             const start = () => this.audio.start(note.frequency);
             const stop = () => this.audio.stop(note.frequency);
+            const type = index === 0 || index === 9
+                ? ButtonType.ExtraNote
+                : ButtonType.Note;
         
-            return <NoteButton
+            return <PlayerButton
                 key={index}
                 keycode={index == 9 ? 48 : index + 49}
                 text={note.name}
@@ -60,7 +63,7 @@ export class Player extends Component<IProps, {}> {
                 stop={stop}
                 isLeft={index < 5}
                 isTop={index === 4 || index === 9}
-                isExtra={index === 0 || index === 9}
+                type={type}
             />
         });
 
@@ -68,11 +71,33 @@ export class Player extends Component<IProps, {}> {
             ? 'player player--flipped'
             : 'player';
 
+
+        const startUp = () => console.log('ocatave up');
+        const startDown = () => console.log('ocatave down');
+        const stopUp = () => console.log('done');
+        const stopDown = () => console.log('done');
+
         return (
             <div className={classes}>
                 <div className="player__notes">
                     {notes}
                 </div>
+
+                <PlayerButton
+                    keycode={16}
+                    text="Octave Up"
+                    start={startUp}
+                    stop={stopUp}
+                    type={ButtonType.OctaveUp}
+                />
+
+                <PlayerButton
+                    keycode={17}
+                    text="Octave Down"
+                    start={startDown}
+                    stop={stopDown}
+                    type={ButtonType.OctaveDown}
+                />
 
                 <a
                     className="player__back"

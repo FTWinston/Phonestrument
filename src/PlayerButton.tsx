@@ -1,12 +1,19 @@
 import React, { PureComponent } from 'react';
 
+export enum ButtonType {
+    Note,
+    ExtraNote,
+    OctaveDown,
+    OctaveUp,
+}
+
 interface IProps {
     text: string;
-    octave: number;
+    octave?: number;
     
-    isLeft: boolean;
-    isTop: boolean;
-    isExtra: boolean;
+    type: ButtonType;
+    isLeft?: boolean;
+    isTop?: boolean;
 
     start: () => void;
     stop: () => void;
@@ -18,7 +25,7 @@ interface IState {
     active: boolean;
 }
 
-export class NoteButton extends PureComponent<IProps, IState> {
+export class PlayerButton extends PureComponent<IProps, IState> {
     private readonly keydown = (e: KeyboardEvent) => {
         if (e.which === this.props.keycode) {    
             this.setState({
@@ -70,20 +77,32 @@ export class NoteButton extends PureComponent<IProps, IState> {
         };
 
         let classes = this.state.active
-            ? 'player__note player__note--active'
-            : 'player__note';
+            ? 'player__button player__button--active'
+            : 'player__button';
 
         classes += this.props.isLeft
-            ? ' player__note--left'
-            : ' player__note--right';
+            ? ' player__button--left'
+            : ' player__button--right';
 
         if (this.props.isTop) {
-            classes += ' player__note--top';
+            classes += ' player__button--top';
         }
 
-        if (this.props.isExtra) {
-            classes += ' player__note--extra';
+        switch (this.props.type) {
+            case ButtonType.ExtraNote:
+                classes += ' player__button--extra';
+                break;
+            case ButtonType.OctaveDown:
+                classes += ' player__button--octaveDown';
+                break;
+            case ButtonType.OctaveUp:
+                classes += ' player__button--octaveUp';
+                break;
         }
+
+        const octave = this.props.octave === undefined
+            ? undefined
+            : <sub>{this.props.octave}</sub>
 
         return (
             <div
@@ -92,7 +111,7 @@ export class NoteButton extends PureComponent<IProps, IState> {
                 onTouchEnd={touchEnd}
                 onTouchCancel={touchEnd}
             >
-                {this.props.text}<sub>{this.props.octave}</sub>
+                {this.props.text}{octave}
             </div>
         );
     }
