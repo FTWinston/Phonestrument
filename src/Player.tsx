@@ -7,12 +7,15 @@ import { Audio } from './Audio';
 interface IProps {
     exit: () => void;
     notes: INote[];
+    volume: number;
 }
 
 export class Player extends Component<IProps, {}> {
     private audio = new Audio();
 
     componentDidMount() {
+        this.audio.setVolume(this.props.volume);
+
         if (!(document as any).fullscreenElement) {
             document.documentElement.requestFullscreen();
         }
@@ -23,6 +26,12 @@ export class Player extends Component<IProps, {}> {
 
         if (document.exitFullscreen && (document as any).fullscreenElement) {
             document.exitFullscreen();
+        }
+    }
+
+    componentDidUpdate(prevProps: IProps, prevState: {}) {
+        if (this.props.volume !== prevProps.volume) {
+            this.audio.setVolume(this.props.volume);
         }
     }
 

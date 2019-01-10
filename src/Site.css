@@ -38,7 +38,23 @@
 }
 
 .site__options {
-    margin-top: 1em;
+    margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+}
+
+.site__option {
+    margin-top: 0.5em;
+    display: flex;
+}
+
+.site__label {
+    text-align: left;
+    margin-right: 0.5em;
+}
+
+.site__value {
+    flex-grow: 1;
 }
 
 @keyframes App-logo-spin {

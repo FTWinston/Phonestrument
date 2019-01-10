@@ -13,10 +13,11 @@ export class Audio {
     constructor() {
         this.audioCtx = new AudioContext();
         this.gain = this.audioCtx.createGain();
+        this.gain.connect(this.audioCtx.destination);
+    }
 
-        this.gain.gain.setValueAtTime(0.1, this.audioCtx.currentTime);
-
-        this.gain.connect(this.audioCtx.destination)
+    public setVolume(volume: number) {
+        this.gain.gain.setValueAtTime(volume, this.audioCtx.currentTime);
     }
 
     public start(frequency: number) {
