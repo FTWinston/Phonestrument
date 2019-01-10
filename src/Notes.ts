@@ -124,4 +124,28 @@ export const scales: IScale[] = [
         name: 'C Major',
         notes: [ C4, D4, E4, F4, G4, A4, B4, C5 ],
     },
+    {
+        name: 'D Major',
+        notes: [ D4, E4, Gb4, G4, A4, B4, Db5, D5 ],
+    },
+    {
+        name: 'E Major',
+        notes: [ E4, Gb4, Ab4, A4, B4, Db5, Eb5, E5 ],
+    },
+    {
+        name: 'F Major',
+        notes: [ F4, G4, A4, Bb4, C5, D5, E5, F5 ],
+    },
+    {
+        name: 'G Major',
+        notes: [ G4, A4, B4, C5, D5, E5, Gb5, G5 ],
+    },
+    {
+        name: 'A Major',
+        notes: [ A4, B4, Db5, D5, E5, Gb5, Ab5, A5 ],
+    },
+    {
+        name: 'B Major',
+        notes: [ B4, Db5, Eb5, E5, Gb5, Ab5, Bb5, B5 ],
+    },
 ];

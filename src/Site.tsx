@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { IScale, scales } from './Notes';
 import logo from './logo.svg';
 import './Site.css';
 
 interface IProps {
     play: () => void;
+    selectedScale: IScale;
+    selectScale: (scale: IScale) => void;
 }
 
 export class Site extends Component<IProps, {}> {
@@ -12,6 +15,10 @@ export class Site extends Component<IProps, {}> {
             e.preventDefault();
             this.props.play();
         };
+
+        const selectedScaleIndex = scales.indexOf(this.props.selectedScale);
+        const scaleOptions = scales.map((scale, index) => <option key={index} value={index.toString()}>{scale.name}</option>);
+        const selectScale = (e: React.ChangeEvent<HTMLSelectElement>) => this.props.selectScale(scales[e.target.selectedIndex]);
 
         return (
             <div className="site">
@@ -39,6 +46,14 @@ export class Site extends Component<IProps, {}> {
                             Play now
                         </a>
                     </div>
+
+                    <select
+                        className="site__scale"
+                        value={selectedScaleIndex.toString()}
+                        onChange={selectScale}
+                    >
+                        {scaleOptions}
+                    </select>
                 </header>
             </div>
         );

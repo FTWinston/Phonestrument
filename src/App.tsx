@@ -21,11 +21,21 @@ class App extends Component<{}, IState> {
     render() {
         if (this.state.playing) {
             const exit = () => this.setState({ playing: false });
-            return <Player exit={exit} notes={this.state.scale.notes} />
+
+            return <Player
+                exit={exit}
+                notes={this.state.scale.notes}
+            />
         }
         else {
             const play = () => this.setState({ playing: true });
-            return <Site play={play} />
+            const setScale = (scale: IScale) => { console.log('selected scale', scale); this.setState({ scale: scale }) };
+
+            return <Site
+                play={play}
+                selectedScale={this.state.scale}
+                selectScale={setScale}
+            />
         }
     }
 }
