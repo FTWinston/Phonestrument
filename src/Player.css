@@ -22,6 +22,8 @@
 }
 
 .player__note {
+    box-sizing: border-box;
+    border-radius: 2vh;
     background-color: #ccc;
     display: inline-block;
     color: darkblue;
@@ -29,7 +31,6 @@
 
     height: 20vh;
     width: 30vw;
-    margin-top: 3vh;
 
     display: flex;
     justify-content: center;
@@ -40,14 +41,22 @@
     color: red;
 }
 
+.player__note:not(.player__note--top) {
+    border-top: solid black 1px;
+}
+
 .player__note--left {
-    border-top-right-radius: 3vh;
-    border-bottom-right-radius: 3vh;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .player__note--right {
-    border-top-left-radius: 3vh;
-    border-bottom-left-radius: 3vh;
+    border-top-right-radius: 2vh;
+    border-bottom-right-radius: 2vh;
+}
+
+.player__note--extra {
+    background-color: #999;
 }
 
 .player__back {

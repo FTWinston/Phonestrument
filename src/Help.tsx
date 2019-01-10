@@ -25,12 +25,10 @@ export class Help extends Component<IProps, {}> {
                 <p>
                     To play your phone properly, follow these instructions after you click <em>play</em>...
                     <ol className="site__help">
-                        <li>Hold your phone with the screen facing upwards.</li>
-                        <li>Press the {mouthEdge} edge of the phone against your lips.</li>
-                        <li>Rest the phone on your thumbs, with the fingers of each hand along the edges of the phone, so they can all touch the screen.</li>
-                        <li>Push keys and make music!</li>
+                        <li>Hold your phone in two hands, with the {mouthEdge} edge facing you.</li>
+                        <li>Use both thumbs to push the keys on the screen.</li>
+                        <li>That's it. Make some music!</li>
                     </ol>
-                    If the buttons don't fit your hands easily, try calibrating.
                 </p>
                 
                 <div className="site__links">

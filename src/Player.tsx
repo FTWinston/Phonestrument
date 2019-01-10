@@ -51,24 +51,16 @@ export class Player extends Component<IProps, {}> {
             const start = () => this.audio.start(note.frequency);
             const stop = () => this.audio.stop(note.frequency);
         
-            const left = index < 4;
-
-            const margin = index === 3
-                ? this.props.leftButtonOffset
-                : index === 7
-                    ? this.props.rightButtonOffset
-                    : this.props.buttonSpacing;
-
             return <NoteButton
                 key={index}
-                keycode={index + 49}
+                keycode={index == 9 ? 48 : index + 49}
                 text={note.name}
                 octave={note.octave}
                 start={start}
                 stop={stop}
-                height={this.props.buttonLength}
-                topMargin={margin}
-                isLeft={left}
+                isLeft={index < 5}
+                isTop={index === 4 || index === 9}
+                isExtra={index === 0 || index === 9}
             />
         });
 

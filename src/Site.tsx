@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { IScale, scales } from './Notes';
+import { IScale, scales } from './Scales';
 import logo from './logo.svg';
 import './Site.css';
 
 interface IProps {
     play: () => void;
     help: () => void;
-    calibrate: () => void;
     
     selectedScale: IScale;
     selectScale: (scale: IScale) => void;
@@ -28,11 +27,6 @@ export class Site extends Component<IProps, {}> {
         const playClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault();
             this.props.play();
-        };
-
-        const calibrateClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
-            e.preventDefault();
-            this.props.calibrate();
         };
 
         const selectedScaleIndex = scales.indexOf(this.props.selectedScale);
@@ -103,16 +97,6 @@ export class Site extends Component<IProps, {}> {
                             onChange={setFlip}
                         />
                     </label>
-                </div>
-
-                <div className="site__links">
-                    <a
-                        className="site__link"
-                        href="#"
-                        onClick={calibrateClicked}
-                    >
-                        Calibrate to fit
-                    </a>
                 </div>
             </div>
         );
