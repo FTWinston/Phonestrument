@@ -6,6 +6,7 @@ import './Site.css';
 interface IProps {
     play: () => void;
     help: () => void;
+    calibrate: () => void;
     
     selectedScale: IScale;
     selectScale: (scale: IScale) => void;
@@ -29,6 +30,11 @@ export class Site extends Component<IProps, {}> {
             this.props.play();
         };
 
+        const calibrateClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            e.preventDefault();
+            this.props.calibrate();
+        };
+
         const selectedScaleIndex = scales.indexOf(this.props.selectedScale);
         const scaleOptions = scales.map((scale, index) => <option key={index} value={index.toString()}>{scale.name}</option>);
         const selectScale = (e: React.ChangeEvent<HTMLSelectElement>) => this.props.selectScale(scales[e.target.selectedIndex]);
@@ -50,11 +56,11 @@ export class Site extends Component<IProps, {}> {
                         href="#"
                         onClick={helpClicked}
                     >
-                        Learn how
+                        Instructions
                     </a>
                     
                     <a
-                        className="site__link"
+                        className="site__link site__link--primary"
                         href="#"
                         onClick={playClicked}
                     >
@@ -97,6 +103,16 @@ export class Site extends Component<IProps, {}> {
                             onChange={setFlip}
                         />
                     </label>
+                </div>
+
+                <div className="site__links">
+                    <a
+                        className="site__link"
+                        href="#"
+                        onClick={calibrateClicked}
+                    >
+                        Calibrate to fit
+                    </a>
                 </div>
             </div>
         );

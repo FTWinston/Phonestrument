@@ -30,6 +30,7 @@ export class Help extends Component<IProps, {}> {
                         <li>Rest the phone on your thumbs, with the fingers of each hand along the edges of the phone, so they can all touch the screen.</li>
                         <li>Push keys and make music!</li>
                     </ol>
+                    If the buttons don't fit your hands easily, try calibrating.
                 </p>
                 
                 <div className="site__links">

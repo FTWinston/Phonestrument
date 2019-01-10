@@ -38,7 +38,7 @@
 }
 
 .site__options {
-    margin-top: 0.5em;
+    margin: 0.5em 0 1em 0;
     display: flex;
     flex-direction: column;
 }

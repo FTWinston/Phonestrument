@@ -5,8 +5,12 @@ interface IProps {
     octave: number;
     
     isLeft: boolean;
+    height: number;
+    topMargin: number;
+
     start: () => void;
     stop: () => void;
+
     keycode: number;
 }
 
@@ -73,9 +77,15 @@ export class NoteButton extends PureComponent<IProps, IState> {
             ? ' player__note--left'
             : ' player__note--right'
 
+        const style = {
+            height: `${this.props.height}vh`,
+            marginTop: `${this.props.topMargin}vh`,
+        };
+
         return (
             <div
                 className={classes}
+                style={style}
                 onTouchStart={touchStart}
                 onTouchEnd={touchEnd}
                 onTouchCancel={touchEnd}

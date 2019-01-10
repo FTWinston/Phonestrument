@@ -9,6 +9,11 @@ interface IProps {
     notes: INote[];
     volume: number;
     flip: boolean;
+
+    buttonLength: number;
+    buttonSpacing: number;
+    leftButtonOffset: number;
+    rightButtonOffset: number;
 }
 
 export class Player extends Component<IProps, {}> {
@@ -48,6 +53,12 @@ export class Player extends Component<IProps, {}> {
         
             const left = index < 4;
 
+            const margin = index === 3
+                ? this.props.leftButtonOffset
+                : index === 7
+                    ? this.props.rightButtonOffset
+                    : this.props.buttonSpacing;
+
             return <NoteButton
                 key={index}
                 keycode={index + 49}
@@ -55,6 +66,8 @@ export class Player extends Component<IProps, {}> {
                 octave={note.octave}
                 start={start}
                 stop={stop}
+                height={this.props.buttonLength}
+                topMargin={margin}
                 isLeft={left}
             />
         });

@@ -19,7 +19,6 @@
     flex-wrap: wrap;
     max-height: 100vh;
     align-content: space-between;
-    margin-top: 3vh;
 }
 
 .player__note {
@@ -54,6 +53,8 @@
 .player__back {
     color: #ccc;
     position: absolute;
-    right: 0.25em;
     top: 0.25em;
+    left: 0;
+    right: 0;
+    text-align: center;
 }
