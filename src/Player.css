@@ -1,0 +1,40 @@
+.player {
+    background-color: black;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
+
+.player__notes {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-wrap: wrap;
+    max-height: 100vh;
+    align-content: space-between;
+    margin-top: 8vh;
+}
+
+.player__note {
+    background-color: #ccc;
+    display: inline-block;
+    color: darkblue;
+    font-weight: bold;
+
+    height: 20vh;
+    width: 30vw;
+    margin-top: 3vh;
+
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.player__back {
+    color: #ccc;
+    position: absolute;
+    right: 0.25em;
+    top: 0.25em;
+}

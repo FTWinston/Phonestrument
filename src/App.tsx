@@ -1,28 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Player } from './Player';
+import { Site } from './Site';
+import { IScale, scales } from './Notes';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+interface IState {
+    playing: boolean;
+    scale: IScale;
+}
+
+class App extends Component<{}, IState> {
+    constructor(props: {}) {
+        super(props);
+        
+        this.state = {
+            playing: false,
+            scale: scales[0],
+        };
+    }
+
+    render() {
+        if (this.state.playing) {
+            const exit = () => this.setState({ playing: false });
+            return <Player exit={exit} notes={this.state.scale.notes} />
+        }
+        else {
+            const play = () => this.setState({ playing: true });
+            return <Site play={play} />
+        }
+    }
 }
 
 export default App;
