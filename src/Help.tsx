@@ -19,7 +19,7 @@ export class Help extends Component<IProps, {}> {
                     </p>
                 </header>
 
-                <p className="site__help">
+                <div className="site__help">
                     Here's some basic insructions on how to hold your phone in the intended way while playing....<br/>
                     If another way works better for you, do that instead!
                     <ol>
@@ -27,7 +27,7 @@ export class Help extends Component<IProps, {}> {
                         <li>Use both thumbs to push the keys on the screen.</li>
                         <li>That's it. Make some music!</li>
                     </ol>
-                </p>
+                </div>
                 
                 <div className="site__links">
                     <a
