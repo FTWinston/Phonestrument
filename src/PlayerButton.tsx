@@ -28,14 +28,17 @@ interface IState {
 export class PlayerButton extends PureComponent<IProps, IState> {
     private readonly keydown = (e: KeyboardEvent) => {
         if (e.which === this.props.keycode) {    
+            e.preventDefault();
             this.setState({
                 active: true,
             });
             this.props.start();
         }
     };
+    
     private readonly keyup = (e: KeyboardEvent) => {
-        if (e.which === this.props.keycode) {    
+        if (e.which === this.props.keycode) {
+            e.preventDefault();
             this.setState({
                 active: false,
             });
