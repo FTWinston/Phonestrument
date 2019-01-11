@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Player } from './Player';
 import { Site } from './Site';
-import { IScale, scales } from './Scales';
+import { IScale, scaleTypes, IScaleType } from './Scales';
 import { Help } from './Help';
 import { INote, octaves } from './Notes';
 import { determineNotes } from './determineNotes';
@@ -15,24 +15,35 @@ enum Display {
 interface IState {
     display: Display;
 
+    scaleType: IScaleType;
     scale: IScale;
     octave: number;
     volume: number;
 }
 
-const scaleVarName = 'scale';
+const scaleTypeVarName = 'scaleType';
+const scaleNoteVarName = 'scaleNote';
 const octaveVarName = 'octave';
 const volumeVarName = 'volume';
 
 class App extends Component<{}, IState> {
     constructor(props: {}) {
         super(props);
+
+        let scaleType = scaleTypes[0];
+        const savedScaleType = sessionStorage.getItem(scaleTypeVarName);
+        if (savedScaleType !== null) {
+            const match = scaleTypes.filter(s => s.name === savedScaleType);
+            if (match.length > 0) {
+                scaleType = match[0];
+            }
+        }
         
         // load saved settings, if present
-        let scale = scales[0];
-        const savedScale = sessionStorage.getItem(scaleVarName);
+        let scale = scaleType.scales.filter(s => s.name === 'C')[0];
+        const savedScale = sessionStorage.getItem(scaleNoteVarName);
         if (savedScale !== null) {
-            const match = scales.filter(s => s.name === savedScale);
+            const match = scaleType.scales.filter(s => s.name === savedScale);
             if (match.length > 0) {
                 scale = match[0];
             }
@@ -58,6 +69,7 @@ class App extends Component<{}, IState> {
 
         this.state = {
             display: Display.Home,
+            scaleType: scaleType,
             scale: scale,
             octave: octave,
             volume: vol,
@@ -79,9 +91,11 @@ class App extends Component<{}, IState> {
             const highNotes = determineNotes(this.state.scale, this.state.octave + 1);
             const lowNotes = determineNotes(this.state.scale, this.state.octave - 1);
 
+            const keyName = `${this.state.scale.name} ${this.state.scaleType.name}`;
+
             return <Player
                 exit={exit}
-                keyName={this.state.scale.name}
+                keyName={keyName}
                 mainNotes={mainNotes}
                 highNotes={highNotes}
                 lowNotes={lowNotes}
@@ -96,8 +110,22 @@ class App extends Component<{}, IState> {
             const play = () => this.setState({ display: Display.Play });
             const help = () => this.setState({ display: Display.Help });
 
+            const setScaleType = (scaleType: IScaleType) => {
+                const scaleIndex = this.state.scaleType.scales.indexOf(this.state.scale);
+                const newScale = scaleIndex >= 0 && scaleIndex < scaleType.scales.length
+                    ? scaleType.scales[scaleIndex]
+                    : scaleType.scales[0];
+
+                sessionStorage.setItem(scaleTypeVarName, scaleType.name);
+
+                this.setState({
+                    scaleType: scaleType,
+                    scale: newScale,
+                });
+            };
+
             const setScale = (scale: IScale) => {
-                sessionStorage.setItem(scaleVarName, scale.name);
+                sessionStorage.setItem(scaleNoteVarName, scale.name);
                 this.setState({ scale: scale });
             };
 
@@ -115,7 +143,10 @@ class App extends Component<{}, IState> {
                 help={help}
                 play={play}
 
-                selectedScale={this.state.scale}
+                scaleType={this.state.scaleType}
+                selectScaleType={setScaleType}
+
+                scale={this.state.scale}
                 selectScale={setScale}
 
                 octave={this.state.octave}

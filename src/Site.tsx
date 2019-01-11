@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IScale, scales } from './Scales';
+import { IScale, scaleTypes, IScaleType } from './Scales';
 import logo from './logo.svg';
 import './Site.css';
 
@@ -7,7 +7,10 @@ interface IProps {
     play: () => void;
     help: () => void;
     
-    selectedScale: IScale;
+    scaleType: IScaleType;
+    selectScaleType: (scaleType: IScaleType) => void;
+
+    scale: IScale;
     selectScale: (scale: IScale) => void;
 
     octave: number;
@@ -29,9 +32,14 @@ export class Site extends Component<IProps, {}> {
             this.props.play();
         };
 
-        const selectedScaleIndex = scales.indexOf(this.props.selectedScale);
-        const scaleOptions = scales.map((scale, index) => <option key={index} value={index.toString()}>{scale.name}</option>);
-        const selectScale = (e: React.ChangeEvent<HTMLSelectElement>) => this.props.selectScale(scales[e.target.selectedIndex]);
+        const selectedScaleTypeIndex = scaleTypes.indexOf(this.props.scaleType);
+        const selectedScaleNoteIndex = this.props.scaleType.scales.indexOf(this.props.scale);
+
+        const scaleTypeOptions = scaleTypes.map((scaleType, index) => <option key={index} value={index.toString()}>{scaleType.name}</option>);
+        const scaleNoteOptions = this.props.scaleType.scales.map((scale, index) => <option key={index} value={index.toString()}>{scale.name}</option>);
+
+        const selectScaleType = (e: React.ChangeEvent<HTMLSelectElement>) => this.props.selectScaleType(scaleTypes[e.target.selectedIndex]);
+        const selectScale = (e: React.ChangeEvent<HTMLSelectElement>) => this.props.selectScale(this.props.scaleType.scales[e.target.selectedIndex]);
         const setOctave = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setOctave(parseInt(e.target.value));
         const setVolume = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setVolume(parseFloat(e.target.value));
 
@@ -65,13 +73,24 @@ export class Site extends Component<IProps, {}> {
                 <div className="site__options">
                 
                     <label className="site__option">
-                        <span className="site__label">Key</span>
+                        <span className="site__label">Scale</span>
                         <select
                             className="site__value"
-                            value={selectedScaleIndex.toString()}
+                            value={selectedScaleTypeIndex.toString()}
+                            onChange={selectScaleType}
+                        >
+                            {scaleTypeOptions}
+                        </select>
+                    </label>
+
+                    <label className="site__option">
+                        <span className="site__label">Tonic</span>
+                        <select
+                            className="site__value"
+                            value={selectedScaleNoteIndex.toString()}
                             onChange={selectScale}
                         >
-                            {scaleOptions}
+                            {scaleNoteOptions}
                         </select>
                     </label>
 
