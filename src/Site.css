@@ -19,6 +19,7 @@
 
 .site__help {
     text-align: left;
+    padding: 0 1em;
 }
 
 .site__help li + li {

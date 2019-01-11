@@ -18,13 +18,11 @@ interface IState {
     scale: IScale;
     octave: number;
     volume: number;
-    flip: boolean;
 }
 
 const scaleVarName = 'scale';
 const octaveVarName = 'octave';
 const volumeVarName = 'volume';
-const flipVarName = 'flip';
 
 class App extends Component<{}, IState> {
     constructor(props: {}) {
@@ -58,17 +56,11 @@ class App extends Component<{}, IState> {
             }
         }
 
-        let flip = false;
-        if (sessionStorage.getItem(flipVarName) === '1') {
-            flip = true;
-        }
-
         this.state = {
             display: Display.Home,
             scale: scale,
             octave: octave,
             volume: vol,
-            flip: flip,
         };
     }
 
@@ -78,7 +70,6 @@ class App extends Component<{}, IState> {
 
             return <Help
                 back={back}
-                flip={this.state.flip}
             />
         }
         else if (this.state.display === Display.Play) {
@@ -95,7 +86,6 @@ class App extends Component<{}, IState> {
                 highNotes={highNotes}
                 lowNotes={lowNotes}
                 volume={this.state.volume}
-                flip={this.state.flip}
                 buttonLength={20}
                 buttonSpacing={3}
                 leftButtonOffset={3}
@@ -121,11 +111,6 @@ class App extends Component<{}, IState> {
                 this.setState({ volume: vol });
             };
 
-            const setFlip = (flip: boolean) => {
-                sessionStorage.setItem(flipVarName, flip ? '1' : '0');
-                this.setState({ flip: flip });
-            };
-
             return <Site
                 help={help}
                 play={play}
@@ -138,9 +123,6 @@ class App extends Component<{}, IState> {
 
                 volume={this.state.volume}
                 setVolume={setVolume}
-
-                flip={this.state.flip}
-                setFlip={setFlip}
             />
         }
     }

@@ -13,7 +13,6 @@ interface IProps {
     lowNotes: INote[];
 
     volume: number;
-    flip: boolean;
 
     buttonLength: number;
     buttonSpacing: number;
@@ -84,11 +83,7 @@ export class Player extends Component<IProps, IState> {
                 type={type}
             />
         });
-
-        const classes = this.props.flip
-            ? 'player player--flipped'
-            : 'player';
-
+        
         const startUp = () => {
             this.setState({ notes: this.props.highNotes });
         }
@@ -102,7 +97,7 @@ export class Player extends Component<IProps, IState> {
         };
 
         return (
-            <div className={classes}>
+            <div className="player">
                 <div className="player__notes">
                     {notes}
                 </div>
@@ -119,7 +114,7 @@ export class Player extends Component<IProps, IState> {
                     </a>
 
                     <div className="player__spacer" />
-                    
+
                     <PlayerButton
                         keycode={16}
                         text="Octave Up"
