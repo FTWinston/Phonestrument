@@ -10,6 +10,9 @@ interface IProps {
     selectedScale: IScale;
     selectScale: (scale: IScale) => void;
 
+    octave: number;
+    setOctave: (octave: number) => void;
+
     volume: number;
     setVolume: (vol: number) => void;
 
@@ -32,6 +35,7 @@ export class Site extends Component<IProps, {}> {
         const selectedScaleIndex = scales.indexOf(this.props.selectedScale);
         const scaleOptions = scales.map((scale, index) => <option key={index} value={index.toString()}>{scale.name}</option>);
         const selectScale = (e: React.ChangeEvent<HTMLSelectElement>) => this.props.selectScale(scales[e.target.selectedIndex]);
+        const setOctave = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setOctave(parseInt(e.target.value));
         const setVolume = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setVolume(parseFloat(e.target.value));
         const setFlip = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setFlip(e.target.checked);
 
@@ -73,6 +77,19 @@ export class Site extends Component<IProps, {}> {
                         >
                             {scaleOptions}
                         </select>
+                    </label>
+
+                    <label className="site__option">
+                        <span className="site__label">Octave</span>
+                        <input
+                            className="site__value"
+                            type="range"
+                            min="2"
+                            max="6"
+                            step="1"
+                            value={this.props.octave}
+                            onChange={setOctave}
+                        />
                     </label>
 
                     <label className="site__option">

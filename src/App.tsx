@@ -3,6 +3,8 @@ import { Player } from './Player';
 import { Site } from './Site';
 import { IScale, scales } from './Scales';
 import { Help } from './Help';
+import { INote, octaves } from './Notes';
+import { determineNotes } from './determineNotes';
 
 enum Display {
     Home,
@@ -14,11 +16,13 @@ interface IState {
     display: Display;
 
     scale: IScale;
+    octave: number;
     volume: number;
     flip: boolean;
 }
 
 const scaleVarName = 'scale';
+const octaveVarName = 'octave';
 const volumeVarName = 'volume';
 const flipVarName = 'flip';
 
@@ -28,12 +32,20 @@ class App extends Component<{}, IState> {
         
         // load saved settings, if present
         let scale = scales[0];
-
         const savedScale = sessionStorage.getItem(scaleVarName);
         if (savedScale !== null) {
             const match = scales.filter(s => s.name === savedScale);
             if (match.length > 0) {
                 scale = match[0];
+            }
+        }
+
+        let octave = 4;
+        const savedOctave = sessionStorage.getItem(octaveVarName);
+        if (savedOctave !== null) {
+            const value = parseInt(savedOctave);
+            if (value >= 0 && value < octaves.length) {
+                octave = value;
             }
         }
 
@@ -54,6 +66,7 @@ class App extends Component<{}, IState> {
         this.state = {
             display: Display.Home,
             scale: scale,
+            octave: octave,
             volume: vol,
             flip: flip,
         };
@@ -71,9 +84,15 @@ class App extends Component<{}, IState> {
         else if (this.state.display === Display.Play) {
             const exit = () => this.setState({ display: Display.Home });
 
+            const mainNotes = determineNotes(this.state.scale, this.state.octave);
+            const highNotes = determineNotes(this.state.scale, this.state.octave + 1);
+            const lowNotes = determineNotes(this.state.scale, this.state.octave - 1);
+
             return <Player
                 exit={exit}
-                notes={this.state.scale.notes}
+                mainNotes={mainNotes}
+                highNotes={highNotes}
+                lowNotes={lowNotes}
                 volume={this.state.volume}
                 flip={this.state.flip}
                 buttonLength={20}
@@ -89,6 +108,11 @@ class App extends Component<{}, IState> {
             const setScale = (scale: IScale) => {
                 sessionStorage.setItem(scaleVarName, scale.name);
                 this.setState({ scale: scale });
+            };
+
+            const setOctave = (octave: number) => {
+                sessionStorage.setItem(octaveVarName, octave.toString());
+                this.setState({ octave: octave });
             };
 
             const setVolume = (vol: number) => {
@@ -107,6 +131,9 @@ class App extends Component<{}, IState> {
 
                 selectedScale={this.state.scale}
                 selectScale={setScale}
+
+                octave={this.state.octave}
+                setOctave={setOctave}
 
                 volume={this.state.volume}
                 setVolume={setVolume}

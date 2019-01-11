@@ -1,37 +1,37 @@
-import * as N from './Notes';
+import { C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B } from './Notes';
 
 export interface IScale {
     name: string;
-    notes: N.INote[];
+    notes: number[];
 }
 
 export const scales: IScale[] = [
     {
         name: 'C Major',
-        notes: [ N.B3, N.C4, N.D4, N.E4, N.F4, N.G4, N.A4, N.B4, N.C5, N.D5 ],
+        notes: [ C, D, E, F, G, A, B ],
     },
     {
         name: 'D Major',
-        notes: [ N.Db4, N.D4, N.E4, N.Gb4, N.G4, N.A4, N.B4, N.Db5, N.D5, N.E5 ],
+        notes: [ D, E, Gb, G, A, B, Db ],
     },
     {
         name: 'E Major',
-        notes: [ N.Eb4, N.E4, N.Gb4, N.Ab4, N.A4, N.B4, N.Db5, N.Eb5, N.E5, N.Gb5 ],
+        notes: [ E, Gb, Ab, A, B, Db, Eb ],
     },
     {
         name: 'F Major',
-        notes: [ N.E4, N.F4, N.G4, N.A4, N.Bb4, N.C5, N.D5, N.E5, N.F5, N.G5 ],
+        notes: [ F, G, A, Bb, C, D, E ],
     },
     {
         name: 'G Major',
-        notes: [ N.Gb4, N.G4, N.A4, N.B4, N.C5, N.D5, N.E5, N.Gb5, N.G5, N.A5 ],
+        notes: [ G, A, B, C, D, E, Gb ],
     },
     {
         name: 'A Major',
-        notes: [ N.Ab4, N.A4, N.B4, N.Db5, N.D5, N.E5, N.Gb5, N.Ab5, N.A5, N.B5 ],
+        notes: [ A, B, Db, D, E, Gb, Ab ],
     },
     {
         name: 'B Major',
-        notes: [ N.Bb4, N.B4, N.Db5, N.Eb5, N.E5, N.Gb5, N.Ab5, N.Bb5, N.B5, N.Db6 ],
+        notes: [ B, Db, Eb, E, Gb, Ab, Bb ],
     },
 ];

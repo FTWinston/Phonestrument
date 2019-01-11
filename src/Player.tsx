@@ -6,7 +6,11 @@ import { Audio } from './Audio';
 
 interface IProps {
     exit: () => void;
-    notes: INote[];
+
+    mainNotes: INote[];
+    highNotes: INote[];
+    lowNotes: INote[];
+
     volume: number;
     flip: boolean;
 
@@ -16,8 +20,20 @@ interface IProps {
     rightButtonOffset: number;
 }
 
-export class Player extends Component<IProps, {}> {
+interface IState {
+    notes: INote[];
+}
+
+export class Player extends Component<IProps, IState> {
     private audio = new Audio();
+
+    constructor(props: IProps) {
+        super(props);
+
+        this.state = {
+            notes: props.mainNotes,
+        };
+    }
 
     componentDidMount() {
         this.audio.setVolume(this.props.volume);
@@ -47,7 +63,7 @@ export class Player extends Component<IProps, {}> {
             this.props.exit();
         };
 
-        const notes = this.props.notes.map((note, index) => {
+        const notes = this.state.notes.map((note, index) => {
             const start = () => this.audio.start(note.frequency);
             const stop = () => this.audio.stop(note.frequency);
             const type = index === 0 || index === 9
@@ -71,11 +87,20 @@ export class Player extends Component<IProps, {}> {
             ? 'player player--flipped'
             : 'player';
 
+        const startUp = () => {
+            this.setState({ notes: this.props.highNotes });
+            this.audio.stopAll();
+        }
 
-        const startUp = () => console.log('ocatave up');
-        const startDown = () => console.log('ocatave down');
-        const stopUp = () => console.log('done');
-        const stopDown = () => console.log('done');
+        const startDown = () => {
+            this.setState({ notes: this.props.lowNotes });
+            this.audio.stopAll();
+        }
+        
+        const stopUpDown = () => {
+            this.setState({ notes: this.props.mainNotes });
+            this.audio.stopAll();
+        };
 
         return (
             <div className={classes}>
@@ -87,7 +112,7 @@ export class Player extends Component<IProps, {}> {
                     keycode={16}
                     text="Octave Up"
                     start={startUp}
-                    stop={stopUp}
+                    stop={stopUpDown}
                     type={ButtonType.OctaveUp}
                 />
 
@@ -95,7 +120,7 @@ export class Player extends Component<IProps, {}> {
                     keycode={17}
                     text="Octave Down"
                     start={startDown}
-                    stop={stopDown}
+                    stop={stopUpDown}
                     type={ButtonType.OctaveDown}
                 />
 

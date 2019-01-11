@@ -1,3 +1,5 @@
+import { INote } from "./Notes";
+
 //const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
 
 interface INoteOscillator {
@@ -8,7 +10,7 @@ interface INoteOscillator {
 export class Audio {
     private readonly audioCtx: AudioContext;
     private readonly gain: GainNode;
-    private readonly oscillators: { [key:number]: INoteOscillator; } = {};
+    private oscillators: { [key:number]: INoteOscillator; } = {};
 
     constructor() {
         this.audioCtx = new AudioContext();
@@ -53,7 +55,19 @@ export class Audio {
         }
 
         delete this.oscillators[frequency];
-        
+        this.stopOscillator(noteOscillator);
+    }
+
+    public stopAll() {
+        for (let key in this.oscillators) {
+            const noteOscillator = this.oscillators[key];
+            this.stopOscillator(noteOscillator);
+        }
+
+        this.oscillators = {};
+    }
+
+    private stopOscillator(noteOscillator: INoteOscillator) {
         // fade out, to avoid a "pop" from the sudden cutoff
         const gain = noteOscillator.gain.gain;
         gain.setValueAtTime(gain.value, this.audioCtx.currentTime); 
@@ -63,14 +77,5 @@ export class Audio {
             noteOscillator.oscillator.stop();
             noteOscillator.gain.disconnect(this.gain);
         }, 25);
-    }
-
-    public stopAll() {
-        for (let key in this.oscillators) {
-            const noteOscillator = this.oscillators[key];
-
-            noteOscillator.oscillator.stop();
-            noteOscillator.gain.disconnect(this.gain);
-        }
     }
 }
