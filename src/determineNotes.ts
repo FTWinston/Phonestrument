@@ -1,7 +1,7 @@
 import { octaves } from './Notes';
-import { IScale } from './Scales';
+import { IScale, IScaleType } from './Scales';
 
-export function determineNotes(scale: IScale, octave: number) {
+export function determineNotes(scale: IScale, scaleType: IScaleType, octave: number) {
     let lastNoteIndex = -1;
     let octaveOffset = 0;
 
@@ -14,21 +14,10 @@ export function determineNotes(scale: IScale, octave: number) {
 
         return octaves[octave + octaveOffset][noteIndex];
     });
-
-    let numToAddToStart: number;
-
-    switch (scale.notes.length) {
-        case 6:
-        case 7:
-        case 8:
-            numToAddToStart = 1;
-            break;
-        default:
-            numToAddToStart = 0;
-            break;
-    }
     
-    const numToAddToEnd = 10 - scale.notes.length - numToAddToStart;
+    const numToAddToEnd = scaleType.displayNoteBeforeTonic
+        ? 9 - scale.notes.length
+        : 10 - scale.notes.length;
 
     for (let iToCopy = 0; iToCopy < numToAddToEnd; iToCopy++) {
         let noteIndex = scale.notes[iToCopy];
@@ -39,8 +28,8 @@ export function determineNotes(scale: IScale, octave: number) {
         scaleNotes.push(octaves[octave + octaveOffset][noteIndex]);    
     }
 
-    if (numToAddToStart > 0) {
-        // and now put the last note onto the beginning, down an octave
+    if (scaleType.displayNoteBeforeTonic) {
+        // put the last note onto the beginning, down an octave
         const noteIndex = scale.notes[scale.notes.length - 1];
         const firstNoteIndex = scale.notes[0];
         octaveOffset = noteIndex > firstNoteIndex ? -1 : 0;

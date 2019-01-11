@@ -13,11 +13,8 @@ interface IProps {
     lowNotes: INote[];
 
     volume: number;
-
-    buttonLength: number;
-    buttonSpacing: number;
-    leftButtonOffset: number;
-    rightButtonOffset: number;
+    
+    highlightButtons: number[];
 }
 
 interface IState {
@@ -67,9 +64,9 @@ export class Player extends Component<IProps, IState> {
             const start = () => this.audio.start(index, note.frequency);
             const stop = () => this.audio.stop(index);
 
-            const type = index === 0 || index === 9
-                ? ButtonType.ExtraNote
-                : ButtonType.Note;
+            const type = this.props.highlightButtons.indexOf(index) === -1
+                ? ButtonType.Note
+                : ButtonType.HighlightNote;
         
             return <PlayerButton
                 key={index}
@@ -83,7 +80,7 @@ export class Player extends Component<IProps, IState> {
                 type={type}
             />
         });
-        
+
         const startUp = () => {
             this.setState({ notes: this.props.highNotes });
         }

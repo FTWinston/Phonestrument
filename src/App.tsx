@@ -87,23 +87,37 @@ class App extends Component<{}, IState> {
         else if (this.state.display === Display.Play) {
             const exit = () => this.setState({ display: Display.Home });
 
-            const mainNotes = determineNotes(this.state.scale, this.state.octave);
-            const highNotes = determineNotes(this.state.scale, this.state.octave + 1);
-            const lowNotes = determineNotes(this.state.scale, this.state.octave - 1);
+            const mainNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave);
+            const highNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave + 1);
+            const lowNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave - 1);
+
+            let tonicButtonIndices: number[];
+
+            if (this.state.scaleType.displayNoteBeforeTonic) {
+                tonicButtonIndices = [ 1 ];
+
+                if (this.state.scale.notes.length < 9) {
+                    tonicButtonIndices.push(this.state.scale.notes.length + 1);
+                }
+            }
+            else {
+                tonicButtonIndices = [ 0 ];
+
+                if (this.state.scale.notes.length < 10) {
+                    tonicButtonIndices.push(this.state.scale.notes.length);
+                }
+            }
 
             const keyName = `${this.state.scale.name} ${this.state.scaleType.name}`;
 
             return <Player
                 exit={exit}
                 keyName={keyName}
+                highlightButtons={tonicButtonIndices}
                 mainNotes={mainNotes}
                 highNotes={highNotes}
                 lowNotes={lowNotes}
                 volume={this.state.volume}
-                buttonLength={20}
-                buttonSpacing={3}
-                leftButtonOffset={3}
-                rightButtonOffset={6}
             />
         }
         else {

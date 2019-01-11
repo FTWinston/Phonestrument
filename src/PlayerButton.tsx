@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 
 export enum ButtonType {
     Note,
-    ExtraNote,
+    HighlightNote,
     OctaveDown,
     OctaveUp,
 }
@@ -83,7 +83,7 @@ export class PlayerButton extends PureComponent<IProps, IState> {
             ? 'player__button player__button--active'
             : 'player__button';
 
-        if (this.props.type == ButtonType.Note || this.props.type == ButtonType.ExtraNote) {
+        if (this.props.type == ButtonType.Note || this.props.type == ButtonType.HighlightNote) {
             classes += this.props.isLeft
                 ? ' player__button--left'
                 : ' player__button--right';
@@ -94,8 +94,8 @@ export class PlayerButton extends PureComponent<IProps, IState> {
         }
 
         switch (this.props.type) {
-            case ButtonType.ExtraNote:
-                classes += ' player__button--extra';
+            case ButtonType.HighlightNote:
+                classes += ' player__button--highlight';
                 break;
             case ButtonType.OctaveDown:
                 classes += ' player__button--octaveDown';

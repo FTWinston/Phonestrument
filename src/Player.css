@@ -60,8 +60,8 @@
     border-bottom-right-radius: 0;
 }
 
-.player__button--extra {
-    background-color: #999;
+.player__button--highlight {
+    background-color: #aaf;
 }
 
 .player__button--octaveDown,
