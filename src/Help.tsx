@@ -24,7 +24,8 @@ export class Help extends Component<IProps, {}> {
                     If another way works better for you, do that instead!
                     <ol>
                         <li>Hold your phone in "portrait" oreientation, using two hands, with the bottom edge facing you.</li>
-                        <li>Use both thumbs to push the keys on the screen.</li>
+                        <li>Use both thumbs to push the note buttons on the screen; left hand for the left ones, right hand for the right ones.</li>
+                        <li>Use either thumb to push the central buttons, whichever one isn't in use.</li>
                         <li>That's it. Make some music!</li>
                     </ol>
                 </div>
