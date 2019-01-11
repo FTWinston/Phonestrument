@@ -80,12 +80,14 @@ export class PlayerButton extends PureComponent<IProps, IState> {
             ? 'player__button player__button--active'
             : 'player__button';
 
-        classes += this.props.isLeft
-            ? ' player__button--left'
-            : ' player__button--right';
+        if (this.props.type == ButtonType.Note || this.props.type == ButtonType.ExtraNote) {
+            classes += this.props.isLeft
+                ? ' player__button--left'
+                : ' player__button--right';
 
-        if (this.props.isTop) {
-            classes += ' player__button--top';
+            if (this.props.isTop) {
+                classes += ' player__button--top';
+            }
         }
 
         switch (this.props.type) {

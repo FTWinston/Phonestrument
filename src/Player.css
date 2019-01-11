@@ -1,5 +1,4 @@
 .player {
-    background-color: black;
     position: fixed;
     top: 0;
     bottom: 0;
@@ -47,8 +46,8 @@
 }
 
 .player__button--right {
-    border-top-right-radius: 2vh;
-    border-bottom-right-radius: 2vh;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .player__button--extra {

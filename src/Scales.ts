@@ -34,4 +34,24 @@ export const scales: IScale[] = [
         name: 'B Major',
         notes: [ B, Db, Eb, E, Gb, Ab, Bb ],
     },
+    {
+        name: 'D♭ Major',
+        notes: [ Db, Eb, F, Gb, Ab, Bb, C ],
+    },
+    {
+        name: 'E♭ Major',
+        notes: [ Eb, F, G, Ab, Bb, C, D ],
+    },
+    {
+        name: 'G♭ Major',
+        notes: [ Gb, Ab, Bb, B, Db, Eb, F ],
+    },
+    {
+        name: 'A♭ Major',
+        notes: [ Ab, Bb, C, Db, Eb, F, G ],
+    },
+    {
+        name: 'B♭ Major',
+        notes: [ Bb, C, D, Eb, F, G, A ],
+    },
 ];
