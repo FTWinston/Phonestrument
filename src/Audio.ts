@@ -22,8 +22,8 @@ export class Audio {
         this.gain.gain.setValueAtTime(volume, this.audioCtx.currentTime);
     }
 
-    public start(frequency: number) {
-        let noteOscillator = this.oscillators[frequency];
+    public start(key: number, frequency: number) {
+        let noteOscillator = this.oscillators[key];
 
         if (noteOscillator !== undefined) {
             // already playing, cannot play more
@@ -40,21 +40,21 @@ export class Audio {
         oscillator.connect(noteGain);
 
         noteGain.connect(this.gain)
-        this.oscillators[frequency] = {
+        this.oscillators[key] = {
             oscillator: oscillator,
             gain: noteGain,
         };
     }
 
-    public stop(frequency: number) {
-        const noteOscillator = this.oscillators[frequency];
+    public stop(key: number) {
+        const noteOscillator = this.oscillators[key];
 
         if (noteOscillator === undefined) {
             // not playing this frequency, nothing to stop
             return;
         }
 
-        delete this.oscillators[frequency];
+        delete this.oscillators[key];
         this.stopOscillator(noteOscillator);
     }
 

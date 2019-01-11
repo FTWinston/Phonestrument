@@ -64,8 +64,9 @@ export class Player extends Component<IProps, IState> {
         };
 
         const notes = this.state.notes.map((note, index) => {
-            const start = () => this.audio.start(note.frequency);
-            const stop = () => this.audio.stop(note.frequency);
+            const start = () => this.audio.start(index, note.frequency);
+            const stop = () => this.audio.stop(index);
+
             const type = index === 0 || index === 9
                 ? ButtonType.ExtraNote
                 : ButtonType.Note;
@@ -89,17 +90,14 @@ export class Player extends Component<IProps, IState> {
 
         const startUp = () => {
             this.setState({ notes: this.props.highNotes });
-            this.audio.stopAll();
         }
 
         const startDown = () => {
             this.setState({ notes: this.props.lowNotes });
-            this.audio.stopAll();
         }
         
         const stopUpDown = () => {
             this.setState({ notes: this.props.mainNotes });
-            this.audio.stopAll();
         };
 
         return (
