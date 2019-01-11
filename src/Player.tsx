@@ -7,6 +7,7 @@ import { Audio } from './Audio';
 interface IProps {
     exit: () => void;
 
+    keyName: string;
     mainNotes: INote[];
     highNotes: INote[];
     lowNotes: INote[];
@@ -106,29 +107,35 @@ export class Player extends Component<IProps, IState> {
                     {notes}
                 </div>
 
-                <PlayerButton
-                    keycode={16}
-                    text="Octave Up"
-                    start={startUp}
-                    stop={stopUpDown}
-                    type={ButtonType.OctaveUp}
-                />
+                <div className="player__middle">
+                    <div className="player__key">{this.props.keyName}</div>
 
-                <PlayerButton
-                    keycode={17}
-                    text="Octave Down"
-                    start={startDown}
-                    stop={stopUpDown}
-                    type={ButtonType.OctaveDown}
-                />
+                    <a
+                        className="player__back"
+                        href="#"
+                        onClick={backClicked}
+                    >
+                        go back
+                    </a>
 
-                <a
-                    className="player__back"
-                    href="#"
-                    onClick={backClicked}
-                >
-                    go back
-                </a>
+                    <div className="player__spacer" />
+                    
+                    <PlayerButton
+                        keycode={16}
+                        text="Octave Up"
+                        start={startUp}
+                        stop={stopUpDown}
+                        type={ButtonType.OctaveUp}
+                    />
+
+                    <PlayerButton
+                        keycode={17}
+                        text="Octave Down"
+                        start={startDown}
+                        stop={stopUpDown}
+                        type={ButtonType.OctaveDown}
+                    />
+                </div>
             </div>
         );
     }

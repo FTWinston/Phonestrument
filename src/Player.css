@@ -20,6 +20,19 @@
     align-content: space-between;
 }
 
+.player__middle {
+    position: fixed;
+    left: 33vw;
+    right: 33vw;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+    
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+}
+
 .player__button {
     box-sizing: border-box;
     border-radius: 2vh;
@@ -56,15 +69,12 @@
 
 .player__button--octaveDown,
 .player__button--octaveUp {
-    position: absolute;
-    left: 35vw;
-    right: 35vw;
     padding: 0 3em;
-    text-align: center;
 }
 
 .player__button--octaveDown {
     bottom: 8vh;
+    margin-bottom: 10vh;
 }
 
 .player__button--octaveUp {
@@ -77,10 +87,11 @@
 }
 
 .player__back {
+    margin-top: 2em;
     color: #ccc;
-    position: absolute;
-    top: 0.25em;
-    left: 0;
-    right: 0;
     text-align: center;
+}
+
+.player__spacer {
+    flex-grow: 1;
 }

@@ -90,6 +90,7 @@ class App extends Component<{}, IState> {
 
             return <Player
                 exit={exit}
+                keyName={this.state.scale.name}
                 mainNotes={mainNotes}
                 highNotes={highNotes}
                 lowNotes={lowNotes}
