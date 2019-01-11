@@ -1,6 +1,6 @@
 {
-  "name": "phonestrument",
-  "version": "0.1.0",
+  "name": "thumbophone",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@types/jest": "23.3.12",
