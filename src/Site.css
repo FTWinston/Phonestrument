@@ -56,6 +56,17 @@
     flex-grow: 1;
 }
 
+@media (orientation: landscape) {
+    .site__options {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 2em;
+        grid-auto-flow: column;
+    }
+}
+
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
