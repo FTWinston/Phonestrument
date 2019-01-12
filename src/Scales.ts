@@ -73,7 +73,7 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'A♭',
-                notes: [ Ab, Bb, B, Db, Eb, E, Gb, Ab ],
+                notes: [ Ab, Bb, B, Db, Eb, E, Gb ],
             },
             {
                 name: 'A',
@@ -81,7 +81,7 @@ export const scaleTypes: IScaleType[] =
             },
             {
                 name: 'B♭',
-                notes: [ Bb, C, Db, Eb, F, Gb, Ab, Bb ],
+                notes: [ Bb, C, Db, Eb, F, Gb, Ab ],
             },
             {
                 name: 'B',
@@ -93,7 +93,7 @@ export const scaleTypes: IScaleType[] =
             },
             {
                 name: 'D♭',
-                notes: [ Db, Eb, E, Gb, Ab, A, B, Db ],
+                notes: [ Db, Eb, E, Gb, Ab, A, B ],
             },
             {
                 name: 'D',
@@ -101,7 +101,7 @@ export const scaleTypes: IScaleType[] =
             },
             {
                 name: 'E♭',
-                notes: [ Eb, F, Gb, Ab, Bb, B, Db, Eb ],
+                notes: [ Eb, F, Gb, Ab, Bb, B, Db ],
             },
             {
                 name: 'E',
@@ -113,7 +113,7 @@ export const scaleTypes: IScaleType[] =
             },
             {
                 name: 'G♭',
-                notes: [ Gb, Ab, A, B, Db, D, E, Gb ],
+                notes: [ Gb, Ab, A, B, Db, D, E ],
             },
             {
                 name: 'G',
