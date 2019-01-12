@@ -60,9 +60,8 @@ export class Player extends Component<IProps, IState> {
             this.props.exit();
         };
 
-        const noteHeight = this.state.notes.length == 12
-            ? 16.6666666667 : undefined;
-            
+        const noteHeight = this.state.notes.length == 10
+            ? undefined : 100 / Math.ceil(this.state.notes.length / 2);
 
         const lastLeft = this.state.notes.length / 2 - 1;
 
