@@ -46,6 +46,7 @@ export class Site extends Component<IProps, {}> {
         return (
             <div className="site">
                 <header className="site__header">
+                    <h2 className="site__title">Thumbophone</h2>
                     <img src={logo} className="site__logo" alt="logo" />
                     <p>
                         Use your phone as a musical instrument!
