@@ -113,7 +113,7 @@ export class Player extends Component<IProps, IState> {
                         href="#"
                         onClick={backClicked}
                     >
-                        go back
+                        Go back
                     </a>
 
                     <div className="player__spacer" />

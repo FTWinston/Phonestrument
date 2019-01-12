@@ -33,9 +33,9 @@
 .player__button {
     box-sizing: border-box;
     border-radius: 2vh;
-    background-color: #ccc;
+    background-color: #ddd;
     display: inline-block;
-    color: darkblue;
+    color: black;
     font-weight: bold;
 
     height: 20vh;
@@ -61,7 +61,7 @@
 }
 
 .player__button--highlight {
-    background-color: #aaf;
+    background-color: #ffffff;
 }
 
 .player__button--octaveDown,
@@ -85,7 +85,7 @@
 
 .player__back {
     margin-top: 1em;
-    color: #ccc;
+    color: #61dafb;
     text-align: center;
 }
 
