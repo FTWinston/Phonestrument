@@ -10,3 +10,8 @@ body {
     color: white;
     background-color: #282c34;
 }
+
+select {
+    background-color: #282c34;
+    color: white;
+}
