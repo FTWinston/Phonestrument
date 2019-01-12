@@ -60,6 +60,12 @@ export class Player extends Component<IProps, IState> {
             this.props.exit();
         };
 
+        const noteHeight = this.state.notes.length == 12
+            ? 16.6666666667 : undefined;
+            
+
+        const lastLeft = this.state.notes.length / 2 - 1;
+
         const notes = this.state.notes.map((note, index) => {
             const start = () => this.audio.start(index, note.frequency);
             const stop = () => this.audio.stop(index);
@@ -75,9 +81,10 @@ export class Player extends Component<IProps, IState> {
                 octave={note.octave}
                 start={start}
                 stop={stop}
-                isLeft={index < 5}
-                isTop={index === 4 || index === 9}
+                isLeft={index <= lastLeft}
+                isTop={index === lastLeft || index === this.state.notes.length - 1}
                 type={type}
+                height={noteHeight}
             />
         });
 

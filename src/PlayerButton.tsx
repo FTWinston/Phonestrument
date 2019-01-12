@@ -14,6 +14,7 @@ interface IProps {
     type: ButtonType;
     isLeft?: boolean;
     isTop?: boolean;
+    height?: number;
 
     start: () => void;
     stop: () => void;
@@ -109,9 +110,16 @@ export class PlayerButton extends PureComponent<IProps, IState> {
             ? undefined
             : <sub>{this.props.octave}</sub>
 
+        const style = this.props.height === undefined
+            ? undefined
+            : {
+                height: `${this.props.height}vh`,
+            };
+
         return (
             <div
                 className={classes}
+                style={style}
                 onTouchStart={touchStart}
                 onTouchEnd={touchEnd}
                 onTouchCancel={touchEnd}

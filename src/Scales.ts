@@ -68,56 +68,110 @@ export const scaleTypes: IScaleType[] =
         ]
     },
     {
-        name: 'Natural Minor',
+        name: 'Minor', // Natural minor
         displayNoteBeforeTonic: true,
         scales: [
             {
                 name: 'A♭',
-                notes: [Ab, Bb, B, Db, Eb, E, Gb, Ab ],
+                notes: [ Ab, Bb, B, Db, Eb, E, Gb, Ab ],
             },
             {
                 name: 'A',
-                notes: [A, B, C, D, E, F, G ],
+                notes: [ A, B, C, D, E, F, G ],
             },
             {
                 name: 'B♭',
-                notes: [Bb, C, Db, Eb, F, Gb, Ab, Bb ],
+                notes: [ Bb, C, Db, Eb, F, Gb, Ab, Bb ],
             },
             {
                 name: 'B',
-                notes: [B, Db, D, E, Gb, G, A ],
+                notes: [ B, Db, D, E, Gb, G, A ],
             },
             {
                 name: 'C',
-                notes: [C, D, Eb, F, G, Ab, Bb ],
+                notes: [ C, D, Eb, F, G, Ab, Bb ],
             },
             {
                 name: 'D♭',
-                notes: [Db, Eb, E, Gb, Ab, A, B, Db ],
+                notes: [ Db, Eb, E, Gb, Ab, A, B, Db ],
             },
             {
                 name: 'D',
-                notes: [D, E, F, G, A, Bb, C ],
+                notes: [ D, E, F, G, A, Bb, C ],
             },
             {
                 name: 'E♭',
-                notes: [Eb, F, Gb, Ab, Bb, B, Db, Eb ],
+                notes: [ Eb, F, Gb, Ab, Bb, B, Db, Eb ],
             },
             {
                 name: 'E',
-                notes: [E, Gb, G, A, B, C, D ],
+                notes: [ E, Gb, G, A, B, C, D ],
             },
             {
                 name: 'F',
-                notes: [F, G, Ab, Bb, C, Db, Eb ],
+                notes: [ F, G, Ab, Bb, C, Db, Eb ],
             },
             {
                 name: 'G♭',
-                notes: [Gb, Ab, A, B, Db, D, E, Gb ],
+                notes: [ Gb, Ab, A, B, Db, D, E, Gb ],
             },
             {
                 name: 'G',
-                notes: [G, A, Bb, C, D, Eb, F ],
+                notes: [ G, A, Bb, C, D, Eb, F ],
+            },
+        ]
+    },
+    {
+        name: 'Chromatic',
+        displayNoteBeforeTonic: false,
+        scales: [
+            {
+                name: 'A♭',
+                notes: [ Ab, A, Bb, B, C, Db, D, Eb, E, F, Gb, G ],
+            },
+            {
+                name: 'A',
+                notes: [ A, Bb, B, C, Db, D, Eb, E, F, Gb, G, Ab ],
+            },
+            {
+                name: 'B♭',
+                notes: [ Bb, B, C, Db, D, Eb, E, F, Gb, G, Ab, A ],
+            },
+            {
+                name: 'B',
+                notes: [ B, C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb ],
+            },
+            {
+                name: 'C',
+                notes: [ C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B ],
+            },
+            {
+                name: 'D♭',
+                notes: [ Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B, C ],
+            },
+            {
+                name: 'D',
+                notes: [ D, Eb, E, F, Gb, G, Ab, A, Bb, B, C, Db ],
+            },
+            {
+                name: 'E♭',
+                notes: [ Eb, E, F, Gb, G, Ab, A, Bb, B, C, Db, D ],
+            },
+            {
+                name: 'E',
+                notes: [ E, F, Gb, G, Ab, A, Bb, B, C, Db, D, Eb ],
+            },
+            {
+                name: 'F',
+                notes: [ F, Gb, G, Ab, A, Bb, B, C, Db, D, Eb, E ],
+            },
+            {
+                name: 'G♭',
+                notes: [ Gb, G, Ab, A, Bb, B, C, Db, D, Eb, E, F ],
+            },
+            {
+                name: 'G',
+                notes: [ G, Ab, A, Bb, B, C, Db, D, Eb, E, F, Gb ],
             },
         ]
     },
@@ -127,51 +181,51 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'A♭',
-                notes: [Ab, Bb, B, Db, Eb, F, G ],
+                notes: [ Ab, Bb, B, Db, Eb, F, G ],
             },
             {
                 name: 'A',
-                notes: [A, B, C, D, E, Gb, Ab ],
+                notes: [ A, B, C, D, E, Gb, Ab ],
             },
             {
                 name: 'B♭',
-                notes: [Bb, C, Db, Eb, F, G, A ],
+                notes: [ Bb, C, Db, Eb, F, G, A ],
             },
             {
                 name: 'B',
-                notes: [B, Db, D, E, Gb, Ab, Bb ],
+                notes: [ B, Db, D, E, Gb, Ab, Bb ],
             },
             {
                 name: 'C',
-                notes: [C, D, Eb, F, G, A, B ],
+                notes: [ C, D, Eb, F, G, A, B ],
             },
             {
                 name: 'D♭',
-                notes: [Db, Eb, E, Gb, Ab, Bb, C ],
+                notes: [ Db, Eb, E, Gb, Ab, Bb, C ],
             },
             {
                 name: 'D',
-                notes: [D, E, F, G, A, B, Db ],
+                notes: [ D, E, F, G, A, B, Db ],
             },
             {
                 name: 'E♭',
-                notes: [Eb, F, Gb, Ab, Bb, C, D ],
+                notes: [ Eb, F, Gb, Ab, Bb, C, D ],
             },
             {
                 name: 'E',
-                notes: [E, Gb, G, A, B, Db, Eb ],
+                notes: [ E, Gb, G, A, B, Db, Eb ],
             },
             {
                 name: 'F',
-                notes: [F, G, Ab, Bb, C, D, E ],
+                notes: [ F, G, Ab, Bb, C, D, E ],
             },
             {
                 name: 'G♭',
-                notes: [Gb, Ab, A, B, Db, Eb, F ],
+                notes: [ Gb, Ab, A, B, Db, Eb, F ],
             },
             {
                 name: 'G',
-                notes: [G, A, Bb, C, D, E, Gb ],
+                notes: [ G, A, Bb, C, D, E, Gb ],
             },
         ]
     },
@@ -181,51 +235,51 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'A♭',
-                notes: [Ab, Bb, B, Db, Eb, E, G ],
+                notes: [ Ab, Bb, B, Db, Eb, E, G ],
             },
             {
                 name: 'A',
-                notes: [A, B, C, D, E, F, Ab ],
+                notes: [ A, B, C, D, E, F, Ab ],
             },
             {
                 name: 'B♭',
-                notes: [Bb, C, Db, Eb, F, Gb, A ],
+                notes: [ Bb, C, Db, Eb, F, Gb, A ],
             },
             {
                 name: 'B',
-                notes: [B, Db, D, E, Gb, G, Bb ],
+                notes: [ B, Db, D, E, Gb, G, Bb ],
             },
             {
                 name: 'C',
-                notes: [C, D, Eb, F, G, Ab, B ],
+                notes: [ C, D, Eb, F, G, Ab, B ],
             },
             {
                 name: 'D♭',
-                notes: [Db, Eb, E, Gb, Ab, A, C ],
+                notes: [ Db, Eb, E, Gb, Ab, A, C ],
             },
             {
                 name: 'D',
-                notes: [D, E, F, G, A, Bb, Db ],
+                notes: [ D, E, F, G, A, Bb, Db ],
             },
             {
                 name: 'E♭',
-                notes: [Eb, F, Gb, Ab, Bb, B, D ],
+                notes: [ Eb, F, Gb, Ab, Bb, B, D ],
             },
             {
                 name: 'E',
-                notes: [E, Gb, G, A, B, C, Eb ],
+                notes: [ E, Gb, G, A, B, C, Eb ],
             },
             {
                 name: 'F',
-                notes: [F, G, Ab, Bb, C, Db, E ],
+                notes: [ F, G, Ab, Bb, C, Db, E ],
             },
             {
                 name: 'G♭',
-                notes: [Gb, Ab, A, B, Db, D, F ],
+                notes: [ Gb, Ab, A, B, Db, D, F ],
             },
             {
                 name: 'G',
-                notes: [G, A, Bb, C, D, Eb, Gb ],
+                notes: [ G, A, Bb, C, D, Eb, Gb ],
             },
         ]
     },
@@ -289,51 +343,51 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'A♭',
-                notes: [Ab, Bb, C, Eb, F ],
+                notes: [ Ab, Bb, C, Eb, F ],
             },
             {
                 name: 'A',
-                notes: [A, B, Db, E, Gb ],
+                notes: [ A, B, Db, E, Gb ],
             },
             {
                 name: 'B♭',
-                notes: [Bb, C, D, F, G ],
+                notes: [ Bb, C, D, F, G ],
             },
             {
                 name: 'B',
-                notes: [B, Db, Eb, Gb, Ab ],
+                notes: [ B, Db, Eb, Gb, Ab ],
             },
             {
                 name: 'C',
-                notes: [C, D, E, G, A ],
+                notes: [ C, D, E, G, A ],
             },
             {
                 name: 'D♭',
-                notes: [Db, Eb, F, Ab, Bb ],
+                notes: [ Db, Eb, F, Ab, Bb ],
             },
             {
                 name: 'D',
-                notes: [D, E, Gb, A, B ],
+                notes: [ D, E, Gb, A, B ],
             },
             {
                 name: 'E♭',
-                notes: [Eb, F, G, Bb, C ],
+                notes: [ Eb, F, G, Bb, C ],
             },
             {
                 name: 'E',
-                notes: [E, Gb, Ab, B, Db ],
+                notes: [ E, Gb, Ab, B, Db ],
             },
             {
                 name: 'F',
-                notes: [F, G, A, C, D ],
+                notes: [ F, G, A, C, D ],
             },
             {
                 name: 'G♭',
-                notes: [Gb, Ab, Bb, Db, Eb ],
+                notes: [ Gb, Ab, Bb, Db, Eb ],
             },
             {
                 name: 'G',
-                notes: [G, A, B, D, E ],
+                notes: [ G, A, B, D, E ],
             },
         ]
     },
@@ -343,51 +397,51 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'A♭',
-                notes: [Ab, B, Db, D, Eb, Gb ],
+                notes: [ Ab, B, Db, D, Eb, Gb ],
             },
             {
                 name: 'A',
-                notes: [A, C, D, Eb, E, G ],
+                notes: [ A, C, D, Eb, E, G ],
             },
             {
                 name: 'B♭',
-                notes: [Bb, Db, Eb, E, F, Ab ],
+                notes: [ Bb, Db, Eb, E, F, Ab ],
             },
             {
                 name: 'B',
-                notes: [B, D, E, F, Gb, A ],
+                notes: [ B, D, E, F, Gb, A ],
             },
             {
                 name: 'C',
-                notes: [C, Eb, F, Gb, G, Bb ],
+                notes: [ C, Eb, F, Gb, G, Bb ],
             },
             {
                 name: 'D♭',
-                notes: [Db, E, Gb, G, Ab, B ],
+                notes: [ Db, E, Gb, G, Ab, B ],
             },
             {
                 name: 'D',
-                notes: [D, F, G, Ab, A, C ],
+                notes: [ D, F, G, Ab, A, C ],
             },
             {
                 name: 'E♭',
-                notes: [Eb, Gb, Ab, A, Bb, Db ],
+                notes: [ Eb, Gb, Ab, A, Bb, Db ],
             },
             {
                 name: 'E',
-                notes: [E, G, A, Bb, B, D ],
+                notes: [ E, G, A, Bb, B, D ],
             },
             {
                 name: 'F',
-                notes: [F, Ab, Bb, B, C, Eb ],
+                notes: [ F, Ab, Bb, B, C, Eb ],
             },
             {
                 name: 'G♭',
-                notes: [Gb, A, B, C, Db, E ],
+                notes: [ Gb, A, B, C, Db, E ],
             },
             {
                 name: 'G',
-                notes: [G, Bb, C, Db, D, F ],
+                notes: [ G, Bb, C, Db, D, F ],
             },
         ]
     },
@@ -397,51 +451,51 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'A♭',
-                notes: [Ab, Bb, B, C, Eb, F ],
+                notes: [ Ab, Bb, B, C, Eb, F ],
             },
             {
                 name: 'A',
-                notes: [A, B, C, Db, E, Gb ],
+                notes: [ A, B, C, Db, E, Gb ],
             },
             {
                 name: 'B♭',
-                notes: [Bb, C, Db, D, F, G ],
+                notes: [ Bb, C, Db, D, F, G ],
             },
             {
                 name: 'B',
-                notes: [B, Db, D, Eb, Gb, Ab ],
+                notes: [ B, Db, D, Eb, Gb, Ab ],
             },
             {
                 name: 'C',
-                notes: [C, D, Eb, E, G, A ],
+                notes: [ C, D, Eb, E, G, A ],
             },
             {
                 name: 'D♭',
-                notes: [Db, Eb, E, F, Ab, Bb ],
+                notes: [ Db, Eb, E, F, Ab, Bb ],
             },
             {
                 name: 'D',
-                notes: [D, E, F, Gb, A, B ],
+                notes: [ D, E, F, Gb, A, B ],
             },
             {
                 name: 'E♭',
-                notes: [Eb, F, Gb, G, Bb, C ],
+                notes: [ Eb, F, Gb, G, Bb, C ],
             },
             {
                 name: 'E',
-                notes: [E, Gb, G, Ab, B, Db ],
+                notes: [ E, Gb, G, Ab, B, Db ],
             },
             {
                 name: 'F',
-                notes: [F, G, Ab, A, C, D ],
+                notes: [ F, G, Ab, A, C, D ],
             },
             {
                 name: 'G♭',
-                notes: [Gb, Ab, A, Bb, Db, Eb ],
+                notes: [ Gb, Ab, A, Bb, Db, Eb ],
             },
             {
                 name: 'G',
-                notes: [G, A, Bb, B, D, E ],
+                notes: [ G, A, Bb, B, D, E ],
             },
         ]
     },
@@ -451,51 +505,51 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'A♭',
-                notes: [Ab, Bb, C, Db, Eb, E, F, G ],
+                notes: [ Ab, Bb, C, Db, Eb, E, F, G ],
             },
             {
                 name: 'A',
-                notes: [A, B, Db, D, E, F, Gb, Ab ],
+                notes: [ A, B, Db, D, E, F, Gb, Ab ],
             },
             {
                 name: 'B♭',
-                notes: [Bb, C, D, Eb, F, Gb, G, A ],
+                notes: [ Bb, C, D, Eb, F, Gb, G, A ],
             },
             {
                 name: 'B',
-                notes: [B, Db, Eb, E, Gb, G, Ab, Bb ],
+                notes: [ B, Db, Eb, E, Gb, G, Ab, Bb ],
             },
             {
                 name: 'C',
-                notes: [C, D, E, F, G, Ab, A, B ],
+                notes: [ C, D, E, F, G, Ab, A, B ],
             },
             {
                 name: 'D♭',
-                notes: [Db, Eb, F, Gb, Ab, A, Bb, C ],
+                notes: [ Db, Eb, F, Gb, Ab, A, Bb, C ],
             },
             {
                 name: 'D',
-                notes: [D, E, Gb, G, A, Bb, B, Db ],
+                notes: [ D, E, Gb, G, A, Bb, B, Db ],
             },
             {
                 name: 'E♭',
-                notes: [Eb, F, G, Ab, Bb, B, C, D ],
+                notes: [ Eb, F, G, Ab, Bb, B, C, D ],
             },
             {
                 name: 'E',
-                notes: [E, Gb, Ab, A, B, C, Db, Eb ],
+                notes: [ E, Gb, Ab, A, B, C, Db, Eb ],
             },
             {
                 name: 'F',
-                notes: [F, G, A, Bb, C, Db, D, E ],
+                notes: [ F, G, A, Bb, C, Db, D, E ],
             },
             {
                 name: 'G♭',
-                notes: [Gb, Ab, Bb, B, Db, D, Eb, F ],
+                notes: [ Gb, Ab, Bb, B, Db, D, Eb, F ],
             },
             {
                 name: 'G',
-                notes: [G, A, B, C, D, Eb, E, Gb ],
+                notes: [ G, A, B, C, D, Eb, E, Gb ],
             },
         ]
     },
@@ -505,51 +559,51 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'A♭',
-                notes: [Ab, Bb, B, C, Db, Eb, F, Gb ],
+                notes: [ Ab, Bb, B, C, Db, Eb, F, Gb ],
             },
             {
                 name: 'A',
-                notes: [A, B, C, Db, D, E, Gb, G ],
+                notes: [ A, B, C, Db, D, E, Gb, G ],
             },
             {
                 name: 'B♭',
-                notes: [Bb, C, Db, D, Eb, F, G, Ab ],
+                notes: [ Bb, C, Db, D, Eb, F, G, Ab ],
             },
             {
                 name: 'B',
-                notes: [B, Db, D, Eb, E, Gb, Ab, A ],
+                notes: [ B, Db, D, Eb, E, Gb, Ab, A ],
             },
             {
                 name: 'C',
-                notes: [C, D, Eb, E, F, G, A, Bb ],
+                notes: [ C, D, Eb, E, F, G, A, Bb ],
             },
             {
                 name: 'D♭',
-                notes: [Db, Eb, E, F, Gb, Ab, Bb, B ],
+                notes: [ Db, Eb, E, F, Gb, Ab, Bb, B ],
             },
             {
                 name: 'D',
-                notes: [D, E, F, Gb, G, A, B, C ],
+                notes: [ D, E, F, Gb, G, A, B, C ],
             },
             {
                 name: 'E♭',
-                notes: [Eb, F, Gb, G, Ab, Bb, C, Db ],
+                notes: [ Eb, F, Gb, G, Ab, Bb, C, Db ],
             },
             {
                 name: 'E',
-                notes: [E, Gb, G, Ab, A, B, Db, D ],
+                notes: [ E, Gb, G, Ab, A, B, Db, D ],
             },
             {
                 name: 'F',
-                notes: [F, G, Ab, A, Bb, C, D, Eb ],
+                notes: [ F, G, Ab, A, Bb, C, D, Eb ],
             },
             {
                 name: 'G♭',
-                notes: [Gb, Ab, A, Bb, B, Db, Eb, E ],
+                notes: [ Gb, Ab, A, Bb, B, Db, Eb, E ],
             },
             {
                 name: 'G',
-                notes: [G, A, Bb, B, C, D, E, F ],
+                notes: [ G, A, Bb, B, C, D, E, F ],
             },
         ]
     },
@@ -559,51 +613,51 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'C',
-                notes: [C, Db, Eb, E, Gb, Ab, Bb ],
+                notes: [ C, Db, Eb, E, Gb, Ab, Bb ],
             },
             {
                 name: 'D♭',
-                notes: [Db, D, E, F, G, A, B ],
+                notes: [ Db, D, E, F, G, A, B ],
             },
             {
                 name: 'D',
-                notes: [D, Eb, F, Gb, Ab, Bb, C ],
+                notes: [ D, Eb, F, Gb, Ab, Bb, C ],
             },
             {
                 name: 'E♭',
-                notes: [Eb, E, Gb, G, A, B, Db ],
+                notes: [ Eb, E, Gb, G, A, B, Db ],
             },
             {
                 name: 'E',
-                notes: [E, F, G, Ab, Bb, C, D ],
+                notes: [ E, F, G, Ab, Bb, C, D ],
             },
             {
                 name: 'F',
-                notes: [F, Gb, Ab, A, B, Db, Eb ],
+                notes: [ F, Gb, Ab, A, B, Db, Eb ],
             },
             {
                 name: 'G♭',
-                notes: [Gb, G, A, Bb, C, D, E ],
+                notes: [ Gb, G, A, Bb, C, D, E ],
             },
             {
                 name: 'G',
-                notes: [G, Ab, Bb, B, Db, Eb, F ],
+                notes: [ G, Ab, Bb, B, Db, Eb, F ],
             },
             {
                 name: 'A♭',
-                notes: [Ab, A, B, C, D, E, Gb ],
+                notes: [ Ab, A, B, C, D, E, Gb ],
             },
             {
                 name: 'A',
-                notes: [A, Bb, C, Db, Eb, F, G ],
+                notes: [ A, Bb, C, Db, Eb, F, G ],
             },
             {
                 name: 'B♭',
-                notes: [Bb, B, Db, D, E, Gb, Ab ],
+                notes: [ Bb, B, Db, D, E, Gb, Ab ],
             },
             {
                 name: 'B',
-                notes: [B, C, D, Eb, F, G, A ],
+                notes: [ B, C, D, Eb, F, G, A ],
             },
         ]
     },
