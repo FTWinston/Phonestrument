@@ -96,3 +96,16 @@
 .player__spacer {
     flex-grow: 1;
 }
+
+
+@media (orientation: landscape) {
+    .player__button--left,
+    .player__button--right {
+        width: 22vw;
+    }
+
+    .player__button--octaveDown,
+    .player__button--octaveUp {
+        width: 50vw;
+    }    
+}
