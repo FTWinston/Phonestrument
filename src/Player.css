@@ -80,12 +80,12 @@
 
 .player__button--active {
     color: white;
-    background-color: #61dafb;
+    background-color: #aa99ff;
 }
 
 .player__back {
     margin-top: 1em;
-    color: #61dafb;
+    color: #aa99ff;
     text-align: center;
 }
 
