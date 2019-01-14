@@ -8,9 +8,8 @@ interface IProps {
     exit: () => void;
 
     keyName: string;
-    mainNotes: INote[];
-    highNotes: INote[];
-    lowNotes: INote[];
+    octaves: INote[][];
+    initialScale: number;
 
     volume: number;
     
@@ -28,7 +27,7 @@ export class Player extends Component<IProps, IState> {
         super(props);
 
         this.state = {
-            notes: props.mainNotes,
+            notes: props.octaves[props.initialScale],
         };
     }
 
@@ -87,17 +86,17 @@ export class Player extends Component<IProps, IState> {
             />
         });
 
-        const startUp = () => {
-            this.setState({ notes: this.props.highNotes });
+        const currentIndex = this.props.octaves.indexOf(this.state.notes);
+
+        const octaveUp = () => {
+            this.setState({ notes: this.props.octaves[currentIndex + 1] });
         }
 
-        const startDown = () => {
-            this.setState({ notes: this.props.lowNotes });
+        const octaveDown = () => {
+            this.setState({ notes: this.props.octaves[currentIndex - 1] });
         }
         
-        const stopUpDown = () => {
-            this.setState({ notes: this.props.mainNotes });
-        };
+        const doNothing = () => { };
 
         return (
             <div className="player">
@@ -121,17 +120,19 @@ export class Player extends Component<IProps, IState> {
                     <PlayerButton
                         keycode={16}
                         text="Octave Up"
-                        start={startUp}
-                        stop={stopUpDown}
+                        start={octaveUp}
+                        stop={doNothing}
                         type={ButtonType.OctaveUp}
+                        enabled={currentIndex < this.props.octaves.length - 1}
                     />
 
                     <PlayerButton
                         keycode={17}
                         text="Octave Down"
-                        start={startDown}
-                        stop={stopUpDown}
+                        start={octaveDown}
+                        stop={doNothing}
                         type={ButtonType.OctaveDown}
+                        enabled={currentIndex > 0}
                     />
                 </div>
             </div>

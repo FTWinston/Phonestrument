@@ -87,10 +87,9 @@ class App extends Component<{}, IState> {
         else if (this.state.display === Display.Play) {
             const exit = () => this.setState({ display: Display.Home });
 
-            const mainNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave);
-            const highNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave + 1);
-            const lowNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave - 1);
-
+            const octaves = [1, 2, 3, 4, 5, 6, 7]
+                .map(octave => determineNotes(this.state.scale, this.state.scaleType, octave));
+            
             let tonicButtonIndices: number[];
 
             if (this.state.scaleType.displayNoteBeforeTonic) {
@@ -114,9 +113,8 @@ class App extends Component<{}, IState> {
                 exit={exit}
                 keyName={keyName}
                 highlightButtons={tonicButtonIndices}
-                mainNotes={mainNotes}
-                highNotes={highNotes}
-                lowNotes={lowNotes}
+                octaves={octaves}
+                initialScale={this.state.octave}
                 volume={this.state.volume}
             />
         }

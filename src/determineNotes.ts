@@ -6,7 +6,7 @@ export function determineNotes(scale: IScale, scaleType: IScaleType, octave: num
     let octaveOffset = 0;
 
     const scaleNotes = scale.notes.map(noteIndex => {
-        if (noteIndex < lastNoteIndex) {
+        if (noteIndex < lastNoteIndex && octave + octaveOffset < octaves.length - 1) {
             octaveOffset ++;
         }
 
@@ -21,7 +21,7 @@ export function determineNotes(scale: IScale, scaleType: IScaleType, octave: num
 
     for (let iToCopy = 0; iToCopy < numToAddToEnd; iToCopy++) {
         let noteIndex = scale.notes[iToCopy];
-        if (noteIndex < lastNoteIndex) {
+        if (noteIndex < lastNoteIndex && octave + octaveOffset < octaves.length - 1) {
             octaveOffset ++;
         }
         lastNoteIndex = noteIndex;

@@ -83,6 +83,12 @@
     background-color: #aa99ff;
 }
 
+.player__button--disabled {
+    cursor: not-allowed;
+    color: #666;
+    opacity: 0.6;
+}
+
 .player__back {
     margin-top: 1em;
     color: #aa99ff;

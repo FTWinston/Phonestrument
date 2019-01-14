@@ -12,6 +12,7 @@ interface IProps {
     octave?: number;
     
     type: ButtonType;
+    enabled?: boolean;
     isLeft?: boolean;
     isTop?: boolean;
     height?: number;
@@ -28,11 +29,16 @@ interface IState {
 
 export class PlayerButton extends PureComponent<IProps, IState> {
     private readonly keydown = (e: KeyboardEvent) => {
-        if (e.which === this.props.keycode) {    
+        if (e.which === this.props.keycode) {
             e.preventDefault();
             this.setState({
                 active: true,
             });
+            
+            if (this.props.enabled === false) {
+                return;
+            }
+
             this.props.start();
         }
     };
@@ -43,6 +49,11 @@ export class PlayerButton extends PureComponent<IProps, IState> {
             this.setState({
                 active: false,
             });
+            
+            if (this.props.enabled === false) {
+                return;
+            }
+
             this.props.stop();
         }
     };
@@ -67,22 +78,32 @@ export class PlayerButton extends PureComponent<IProps, IState> {
 
     render() {
         const touchStart = () => {
-            this.setState({
-                active: true,
-            });
-            this.props.start();
-        };
+                this.setState({
+                    active: true,
+                });
+                
+                if (this.props.enabled !== false) {
+                    this.props.start();
+                }
+            };
 
         const touchEnd = () => {
-            this.setState({
-                active: false,
-            });
-            this.props.stop();
-        };
+                this.setState({
+                    active: false,
+                });
+
+                if (this.props.enabled !== false) {
+                    this.props.stop();
+                }
+            };
 
         let classes = this.state.active
             ? 'player__button player__button--active'
             : 'player__button';
+
+        if (this.props.enabled === false) {
+            classes += ' player__button--disabled';
+        }
 
         if (this.props.type == ButtonType.Note || this.props.type == ButtonType.HighlightNote) {
             classes += this.props.isLeft
