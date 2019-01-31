@@ -31,11 +31,15 @@ export class Player extends Component<IProps, IState> {
         };
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         this.audio.setVolume(this.props.volume);
 
         if (!(document as any).fullscreenElement) {
-            document.documentElement.requestFullscreen();
+            await document.documentElement.requestFullscreen();
+            
+            if (screen && screen.orientation && screen.orientation.lock) {
+                await screen.orientation.lock('landscape'); // This causes an error in desktop Chrome, but never mind
+            }
         }
     }
 
