@@ -17,6 +17,8 @@ interface IProps {
 
 interface IState {
     notes: INote[];
+    frontBackTilt: number | null;
+    leftRightTilt: number | null;
 }
 
 export class Player extends Component<IProps, IState> {
@@ -26,6 +28,8 @@ export class Player extends Component<IProps, IState> {
         super(props);
         this.state = {
             notes: props.noteSets[0],
+            frontBackTilt: null,
+            leftRightTilt: null,
         };
     }
 
@@ -38,6 +42,15 @@ export class Player extends Component<IProps, IState> {
             if (screen && screen.orientation && screen.orientation.lock) {
                 await screen.orientation.lock('landscape'); // This causes an error in desktop Chrome, but never mind
             }
+        }
+
+        if ((window as any).DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', e => {
+                this.setState({
+                    frontBackTilt: e.beta,
+                    leftRightTilt: e.gamma,
+                });
+            })
         }
     }
 
@@ -77,6 +90,14 @@ export class Player extends Component<IProps, IState> {
                     >
                         Go back
                     </a>
+
+                    <div className="player__tilt">
+                        front-back tilt: {this.state.frontBackTilt}
+                    </div>
+
+                    <div className="player__tilt">
+                        left-right tilt: {this.state.leftRightTilt}
+                    </div>
                 </div>
             </div>
         );

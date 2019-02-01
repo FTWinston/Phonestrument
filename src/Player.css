@@ -74,6 +74,10 @@
     text-align: center;
 }
 
+.player__tilt {
+    margin-top: 2em;
+}
+
 .player__key {
     font-weight: bold;
 }
