@@ -116,7 +116,6 @@ export class Player extends Component<IProps, IState> {
         
             return <PlayerButton
                 key={index}
-                keycode={index == 9 ? 48 : index + 49}
                 text={note.name}
                 octave={note.octave}
                 start={start}

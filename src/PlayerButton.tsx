@@ -20,8 +20,6 @@ interface IProps {
 
     start: () => void;
     stop: () => void;
-
-    keycode: number;
 }
 
 interface IState {
@@ -29,52 +27,12 @@ interface IState {
 }
 
 export class PlayerButton extends PureComponent<IProps, IState> {
-    private readonly keydown = (e: KeyboardEvent) => {
-        if (e.which === this.props.keycode) {
-            e.preventDefault();
-            this.setState({
-                active: true,
-            });
-            
-            if (this.props.enabled === false) {
-                return;
-            }
-
-            this.props.start();
-        }
-    };
-    
-    private readonly keyup = (e: KeyboardEvent) => {
-        if (e.which === this.props.keycode) {
-            e.preventDefault();
-            this.setState({
-                active: false,
-            });
-            
-            if (this.props.enabled === false) {
-                return;
-            }
-
-            this.props.stop();
-        }
-    };
-
     constructor(props: IProps) {
         super(props);
 
         this.state = {
             active: false,
         };
-    }
-
-    componentDidMount() {
-        document.addEventListener('keydown', this.keydown);
-        document.addEventListener('keyup', this.keyup);
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener('keydown', this.keydown);
-        document.removeEventListener('keyup', this.keyup);
     }
 
     render() {
