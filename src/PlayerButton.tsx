@@ -11,12 +11,12 @@ interface IProps {
     text: string;
     octave?: number;
     
+    orderNum?: number;
     type: ButtonType;
     enabled?: boolean;
     isLeft?: boolean;
     isRight?: boolean;    
     isTop?: boolean;
-    height?: number;
 
     start: () => void;
     stop: () => void;
@@ -92,10 +92,10 @@ export class PlayerButton extends PureComponent<IProps, IState> {
             ? undefined
             : <sub>{this.props.octave}</sub>
 
-        const style = this.props.height === undefined
+        const style = this.props.orderNum === undefined
             ? undefined
             : {
-                height: `${this.props.height}vh`,
+                order: this.props.orderNum,
             };
 
         return (

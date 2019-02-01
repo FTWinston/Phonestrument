@@ -7,7 +7,7 @@ export interface IScale {
 
 export interface IScaleType {
     name: string;
-    displayNoteBeforeTonic: boolean;
+    notesBeforeTonic: number;
     scales: IScale[];
 }
 
@@ -15,7 +15,7 @@ export const scaleTypes: IScaleType[] =
 [
     {
         name: 'Major',
-        displayNoteBeforeTonic: true,
+        notesBeforeTonic: 6,
         scales: [
             {
                 name: 'A♭',
@@ -69,7 +69,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Minor', // Natural minor
-        displayNoteBeforeTonic: true,
+        notesBeforeTonic: 6,
         scales: [
             {
                 name: 'A♭',
@@ -123,7 +123,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Chromatic',
-        displayNoteBeforeTonic: false,
+        notesBeforeTonic: 5,
         scales: [
             {
                 name: 'A♭',
@@ -177,7 +177,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Melodic Minor',
-        displayNoteBeforeTonic: true,
+        notesBeforeTonic: 6,
         scales: [
             {
                 name: 'A♭',
@@ -231,7 +231,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Harmonic Minor',
-        displayNoteBeforeTonic: true,
+        notesBeforeTonic: 6,
         scales: [
             {
                 name: 'A♭',
@@ -285,7 +285,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Minor Pentatonic',
-        displayNoteBeforeTonic: false,
+        notesBeforeTonic: 5,
         scales: [
             {
                 name: 'Ab',
@@ -339,7 +339,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Major Pentatonic',
-        displayNoteBeforeTonic: false,
+        notesBeforeTonic: 5,
         scales: [
             {
                 name: 'A♭',
@@ -393,7 +393,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Minor Pentatonic Blues',
-        displayNoteBeforeTonic: true,
+        notesBeforeTonic: 6,
         scales: [
             {
                 name: 'A♭',
@@ -447,7 +447,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Major Pentatonic Blues',
-        displayNoteBeforeTonic: true,
+        notesBeforeTonic: 6,
         scales: [
             {
                 name: 'A♭',
@@ -501,7 +501,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Major Bebop',
-        displayNoteBeforeTonic: false,
+        notesBeforeTonic: 6,
         scales: [
             {
                 name: 'A♭',
@@ -554,8 +554,8 @@ export const scaleTypes: IScaleType[] =
         ]
     },
     {
-        name: 'Minor Bebop scales',
-        displayNoteBeforeTonic: false,
+        name: 'Minor Bebop',
+        notesBeforeTonic: 6,
         scales: [
             {
                 name: 'A♭',
@@ -609,7 +609,7 @@ export const scaleTypes: IScaleType[] =
     },
     {
         name: 'Super Locrian',
-        displayNoteBeforeTonic: true,
+        notesBeforeTonic: 6,
         scales: [
             {
                 name: 'C',

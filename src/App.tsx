@@ -87,15 +87,15 @@ class App extends Component<{}, IState> {
         else if (this.state.display === Display.Play) {
             const exit = () => this.setState({ display: Display.Home });
 
-            const lowOctave = determineNotes(this.state.scale, this.state.scaleType, this.state.octave);
-            const highOctave = determineNotes(this.state.scale, this.state.scaleType, this.state.octave + 1);
+            const mainNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave);
+            // const alternateNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave + 1);
 
             const keyName = `${this.state.scale.name} ${this.state.scaleType.name}`;
 
             return <Player
                 exit={exit}
                 keyName={keyName}
-                octaves={[lowOctave, highOctave]}
+                noteSets={[mainNotes]}
                 highlightNoteName={this.state.scale.name}
                 volume={this.state.volume}
             />

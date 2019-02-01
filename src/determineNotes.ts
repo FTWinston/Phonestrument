@@ -5,6 +5,7 @@ export function determineNotes(scale: IScale, scaleType: IScaleType, octave: num
     let lastNoteIndex = -1;
     let octaveOffset = 0;
 
+    // Add a full scale of notes
     const scaleNotes = scale.notes.map(noteIndex => {
         if (noteIndex < lastNoteIndex && octave + octaveOffset < octaves.length - 1) {
             octaveOffset ++;
@@ -15,12 +16,17 @@ export function determineNotes(scale: IScale, scaleType: IScaleType, octave: num
         return octaves[octave + octaveOffset][noteIndex];
     });
     
-    const numToAddToEnd = scaleType.displayNoteBeforeTonic
-        ? 9 - scale.notes.length
-        : 10 - scale.notes.length;
+    const numToAddToStart = scaleType.notesBeforeTonic;
+    const numToAddToEnd = 20 - numToAddToStart - scale.notes.length;
 
-    for (let iToCopy = 0; iToCopy < numToAddToEnd; iToCopy++) {
-        let noteIndex = scale.notes[iToCopy];
+    // Add notes to the end, after the "main" octave
+    let iScaleNote = -1;
+    for (let i = 0; i < numToAddToEnd; i++) {
+        iScaleNote++;
+        if (iScaleNote >= scale.notes.length) {
+            iScaleNote = 0;
+        }
+        let noteIndex = scale.notes[iScaleNote];
         if (noteIndex < lastNoteIndex && octave + octaveOffset < octaves.length - 1) {
             octaveOffset ++;
         }
@@ -28,12 +34,21 @@ export function determineNotes(scale: IScale, scaleType: IScaleType, octave: num
         scaleNotes.push(octaves[octave + octaveOffset][noteIndex]);    
     }
 
-    if (scaleType.displayNoteBeforeTonic) {
-        // put the last note onto the beginning, down an octave
-        const noteIndex = scale.notes[scale.notes.length - 1];
-        const firstNoteIndex = scale.notes[0];
-        octaveOffset = noteIndex > firstNoteIndex ? -1 : 0;
-        scaleNotes.unshift(octaves[octave + octaveOffset][noteIndex]);
+    // Add notes to the beginning, before the "main" octave
+    lastNoteIndex = 0;
+    octaveOffset = 0;
+    iScaleNote = scale.notes.length;
+    for (let i = 0; i < numToAddToStart; i++) {
+        iScaleNote--;
+        if (iScaleNote < 0) {
+            iScaleNote = scale.notes.length - 1;
+        }
+        let noteIndex = scale.notes[iScaleNote];
+        if (noteIndex > lastNoteIndex && octave - octaveOffset >= 0) {
+            octaveOffset --;
+        }
+        lastNoteIndex = noteIndex;
+        scaleNotes.unshift(octaves[octave + octaveOffset][noteIndex]);    
     }
 
     return scaleNotes;

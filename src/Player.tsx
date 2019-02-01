@@ -8,7 +8,7 @@ interface IProps {
     exit: () => void;
 
     keyName: string;
-    octaves: INote[][];
+    noteSets: INote[][];
 
     volume: number;
     
@@ -16,7 +16,7 @@ interface IProps {
 }
 
 interface IState {
-    noteColumns: INote[][];
+    notes: INote[];
 }
 
 export class Player extends Component<IProps, IState> {
@@ -24,22 +24,8 @@ export class Player extends Component<IProps, IState> {
 
     constructor(props: IProps) {
         super(props);
-
-        let midPoint = Math.ceil(props.octaves[0].length / 2);
-        const lowFirst = props.octaves[0].slice(0, midPoint);
-        const lowSecond = props.octaves[0].slice(midPoint);
-
-        midPoint = Math.ceil(props.octaves[1].length / 2);
-        const upperFirst = props.octaves[1].slice(0, midPoint);
-        const upperSecond = props.octaves[1].slice(midPoint);
-
         this.state = {
-            noteColumns: [
-                lowFirst,
-                upperFirst,
-                upperSecond,
-                lowSecond,
-            ]
+            notes: props.noteSets[0],
         };
     }
 
@@ -75,17 +61,11 @@ export class Player extends Component<IProps, IState> {
             this.props.exit();
         };
 
-        const noteColumns = this.state.noteColumns.map((col, i) => {
-            const buttons = this.renderNoteButtons(col, i === 0, i === 3);
-
-            return <div className="player__notes" key={i}>
-                {buttons}
-            </div>
-        });
+        const noteButtons = this.renderNoteButtons(this.state.notes);
 
         return (
             <div className="player">
-                {noteColumns}
+                {noteButtons}
 
                 <div className="player__middle">
                     <div className="player__key">{this.props.keyName}</div>
@@ -102,10 +82,9 @@ export class Player extends Component<IProps, IState> {
         );
     }
 
-    private renderNoteButtons(notes: INote[], isLeft: boolean, isRight: boolean) {
-        const noteHeight = notes.length == 5
-            ? undefined : 100 / notes.length;
+    static buttonOrder = [4, 3, 2, 1, 0, 9, 8, 7, 6, 5, 14, 13, 12, 11, 10, 19, 18, 17, 16, 15];
 
+    private renderNoteButtons(notes: INote[]) {
         return notes.map((note, index) => {
             const start = () => this.audio.start(index, note.frequency);
             const stop = () => this.audio.stop(index);
@@ -114,17 +93,21 @@ export class Player extends Component<IProps, IState> {
                 ? ButtonType.HighlightNote
                 : ButtonType.Note;
         
+            const order = index < Player.buttonOrder.length
+                ? Player.buttonOrder[index]
+                : undefined;
+
             return <PlayerButton
                 key={index}
                 text={note.name}
                 octave={note.octave}
+                orderNum={order}
                 start={start}
                 stop={stop}
-                isLeft={isLeft}
-                isRight={isRight}
-                isTop={index === notes.length - 1}
+                isLeft={index < 5}
+                isRight={index >= 15}
+                isTop={index % 5 === 4}
                 type={type}
-                height={noteHeight}
             />
         });
     }
