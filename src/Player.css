@@ -6,22 +6,22 @@
     right: 0;
     overflow: hidden;
     user-select: none;
+
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 7fr 6fr 5fr 6fr 7fr;
+    column-gap: 1px;
 }
 
 .player__notes {
     display: flex;
     flex-direction: column-reverse;
-    flex-wrap: wrap;
     max-height: 100vh;
-    align-content: space-between;
 }
 
 .player__middle {
-    position: fixed;
-    left: 33vw;
-    right: 33vw;
-    top: 0;
-    bottom: 0;
+    grid-column: 3;
+    grid-row: 1;
     text-align: center;
     
     display: flex;
@@ -39,7 +39,6 @@
     font-weight: bold;
 
     height: 20vh;
-    width: 30vw;
 
     display: flex;
     justify-content: center;
@@ -101,17 +100,4 @@
 
 .player__spacer {
     flex-grow: 1;
-}
-
-
-@media (orientation: landscape) {
-    .player__button--left,
-    .player__button--right {
-        width: 22vw;
-    }
-
-    .player__button--octaveDown,
-    .player__button--octaveUp {
-        width: 50vw;
-    }    
 }

@@ -14,6 +14,7 @@ interface IProps {
     type: ButtonType;
     enabled?: boolean;
     isLeft?: boolean;
+    isRight?: boolean;    
     isTop?: boolean;
     height?: number;
 
@@ -106,10 +107,12 @@ export class PlayerButton extends PureComponent<IProps, IState> {
         }
 
         if (this.props.type == ButtonType.Note || this.props.type == ButtonType.HighlightNote) {
-            classes += this.props.isLeft
-                ? ' player__button--left'
-                : ' player__button--right';
-
+            if (this.props.isLeft) {
+                classes += ' player__button--left';
+            }
+            if (this.props.isRight) {
+                classes += ' player__button--right';
+            }
             if (this.props.isTop) {
                 classes += ' player__button--top';
             }

@@ -87,34 +87,16 @@ class App extends Component<{}, IState> {
         else if (this.state.display === Display.Play) {
             const exit = () => this.setState({ display: Display.Home });
 
-            const octaves = [1, 2, 3, 4, 5, 6, 7]
-                .map(octave => determineNotes(this.state.scale, this.state.scaleType, octave));
-            
-            let tonicButtonIndices: number[];
-
-            if (this.state.scaleType.displayNoteBeforeTonic) {
-                tonicButtonIndices = [ 1 ];
-
-                if (this.state.scale.notes.length < 9) {
-                    tonicButtonIndices.push(this.state.scale.notes.length + 1);
-                }
-            }
-            else {
-                tonicButtonIndices = [ 0 ];
-
-                if (this.state.scale.notes.length < 10) {
-                    tonicButtonIndices.push(this.state.scale.notes.length);
-                }
-            }
+            const lowOctave = determineNotes(this.state.scale, this.state.scaleType, this.state.octave);
+            const highOctave = determineNotes(this.state.scale, this.state.scaleType, this.state.octave + 1);
 
             const keyName = `${this.state.scale.name} ${this.state.scaleType.name}`;
 
             return <Player
                 exit={exit}
                 keyName={keyName}
-                highlightButtons={tonicButtonIndices}
-                octaves={octaves}
-                initialScale={this.state.octave}
+                octaves={[lowOctave, highOctave]}
+                highlightNoteName={this.state.scale.name}
                 volume={this.state.volume}
             />
         }

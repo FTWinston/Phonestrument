@@ -100,7 +100,7 @@ export class Site extends Component<IProps, {}> {
                         <input
                             className="site__value"
                             type="range"
-                            min="2"
+                            min="1"
                             max="6"
                             step="1"
                             value={this.props.octave}
