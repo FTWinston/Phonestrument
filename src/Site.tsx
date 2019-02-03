@@ -2,22 +2,30 @@ import React, { Component } from 'react';
 import { IScale, scaleTypes, IScaleType } from './Scales';
 import logo from './logo.svg';
 import './Site.css';
+import { ProfileSettings } from './ProfileSettings';
 
 interface IProps {
     play: () => void;
     help: () => void;
     
+    useSplitProfile: boolean;
+    setUseSplitProfile: (use: boolean) => void;
+
     scaleType: IScaleType;
-    selectScaleType: (scaleType: IScaleType) => void;
+    scaleType2: IScaleType;
+    selectScaleType: (scaleType: IScaleType, isAlt: boolean) => void;
 
     scale: IScale;
-    selectScale: (scale: IScale) => void;
+    scale2: IScale;
+    selectScale: (scale: IScale, isAlt: boolean) => void;
 
     octave: number;
-    setOctave: (octave: number) => void;
+    octave2: number;
+    setOctave: (octave: number, isAlt: boolean) => void;
 
     volume: number;
-    setVolume: (vol: number) => void;
+    volume2: number;
+    setVolume: (vol: number, isAlt: boolean) => void;
 }
 
 export class Site extends Component<IProps, {}> {
@@ -32,16 +40,32 @@ export class Site extends Component<IProps, {}> {
             this.props.play();
         };
 
-        const selectedScaleTypeIndex = scaleTypes.indexOf(this.props.scaleType);
-        const selectedScaleNoteIndex = this.props.scaleType.scales.indexOf(this.props.scale);
+        const selectPrimaryScaleType = (scaleType: IScaleType) => this.props.selectScaleType(scaleType, false);
+        const selectPrimaryScale = (scale: IScale) => this.props.selectScale(scale, false);
+        const setPrimaryOctave = (octave: number) => this.props.setOctave(octave, false);
+        const setPrimaryVolume = (volume: number) => this.props.setVolume(volume, false);
 
-        const scaleTypeOptions = scaleTypes.map((scaleType, index) => <option key={index} value={index.toString()}>{scaleType.name}</option>);
-        const scaleNoteOptions = this.props.scaleType.scales.map((scale, index) => <option key={index} value={index.toString()}>{scale.name}</option>);
+        const switchSplitProfile = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setUseSplitProfile(e.target.checked);
 
-        const selectScaleType = (e: React.ChangeEvent<HTMLSelectElement>) => this.props.selectScaleType(scaleTypes[e.target.selectedIndex]);
-        const selectScale = (e: React.ChangeEvent<HTMLSelectElement>) => this.props.selectScale(this.props.scaleType.scales[e.target.selectedIndex]);
-        const setOctave = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setOctave(parseInt(e.target.value));
-        const setVolume = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setVolume(parseFloat(e.target.value));
+        const selectAlternateScaleType = (scaleType: IScaleType) => this.props.selectScaleType(scaleType, true);
+        const selectAlternateScale = (scale: IScale) => this.props.selectScale(scale, true);
+        const setAlternateOctave = (octave: number) => this.props.setOctave(octave, true);
+        const setAlternateVolume = (volume: number) => this.props.setVolume(volume, true);
+
+        const alternateSettings = this.props.useSplitProfile
+            ? <ProfileSettings
+                isAlternate={true}
+                scaleType={this.props.scaleType2}
+                scale={this.props.scale2}
+                octave={this.props.octave2}
+                volume={this.props.volume2}
+
+                selectScaleType={selectAlternateScaleType}
+                selectScale={selectAlternateScale}
+                setOctave={setAlternateOctave}
+                setVolume={setAlternateVolume}
+            />
+            : undefined;
 
         return (
             <div className="site">
@@ -71,56 +95,29 @@ export class Site extends Component<IProps, {}> {
                     </a>
                 </div>
 
-                <div className="site__options">
-                
-                    <label className="site__option">
-                        <span className="site__label">Scale</span>
-                        <select
-                            className="site__value"
-                            value={selectedScaleTypeIndex.toString()}
-                            onChange={selectScaleType}
-                        >
-                            {scaleTypeOptions}
-                        </select>
-                    </label>
+                <ProfileSettings
+                    isAlternate={false}
+                    scaleType={this.props.scaleType}
+                    scale={this.props.scale}
+                    octave={this.props.octave}
+                    volume={this.props.volume}
 
-                    <label className="site__option">
-                        <span className="site__label">Tonic</span>
-                        <select
-                            className="site__value"
-                            value={selectedScaleNoteIndex.toString()}
-                            onChange={selectScale}
-                        >
-                            {scaleNoteOptions}
-                        </select>
-                    </label>
+                    selectScaleType={selectPrimaryScaleType}
+                    selectScale={selectPrimaryScale}
+                    setOctave={setPrimaryOctave}
+                    setVolume={setPrimaryVolume}
+                />
 
-                    <label className="site__option">
-                        <span className="site__label">Octave</span>
-                        <input
-                            className="site__value"
-                            type="range"
-                            min="1"
-                            max="6"
-                            step="1"
-                            value={this.props.octave}
-                            onChange={setOctave}
-                        />
-                    </label>
+                <label className="site__useAlt">
+                    Tilt screen for alternate configuration
+                    <input
+                        type="checkbox"
+                        checked={this.props.useSplitProfile}
+                        onChange={switchSplitProfile}
+                    />
+                </label>
 
-                    <label className="site__option">
-                        <span className="site__label">Volume</span>
-                        <input
-                            className="site__value"
-                            type="range"
-                            min="0"
-                            max="1"
-                            step="0.025"
-                            value={this.props.volume}
-                            onChange={setVolume}
-                        />
-                    </label>
-                </div>
+                {alternateSettings}
             </div>
         );
     }
