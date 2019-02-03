@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Player } from './Player';
+import { Player, IProfile } from './Player';
 import { Site } from './Site';
 import { IScale, scaleTypes, IScaleType } from './Scales';
 import { Help } from './Help';
@@ -87,17 +87,23 @@ class App extends Component<{}, IState> {
         else if (this.state.display === Display.Play) {
             const exit = () => this.setState({ display: Display.Home });
 
-            const mainNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave);
-            // const alternateNotes = determineNotes(this.state.scale, this.state.scaleType, this.state.octave + 1);
+            const mainConfig: IProfile = {
+                notes: determineNotes(this.state.scale, this.state.scaleType, this.state.octave),
+                highlightNoteName: this.state.scale.name,
+                keyName: `${this.state.scale.name} ${this.state.scaleType.name}`,
+                volume: this.state.volume,
+            };
 
-            const keyName = `${this.state.scale.name} ${this.state.scaleType.name}`;
+            const alternateConfig: IProfile = {
+                notes: determineNotes(scaleTypes[4].scales[3], scaleTypes[4], this.state.octave),
+                highlightNoteName: scaleTypes[4].scales[3].name,
+                keyName: `${scaleTypes[4].scales[3].name} ${scaleTypes[4].name}`,
+                volume: this.state.volume,
+            };
 
             return <Player
                 exit={exit}
-                keyName={keyName}
-                noteSets={[mainNotes]}
-                highlightNoteName={this.state.scale.name}
-                volume={this.state.volume}
+                profiles={[mainConfig, alternateConfig]}
             />
         }
         else {

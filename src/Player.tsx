@@ -4,21 +4,22 @@ import { INote } from './Notes';
 import './Player.css';
 import { Audio } from './Audio';
 
-interface IProps {
-    exit: () => void;
-
+export interface IProfile {
     keyName: string;
-    noteSets: INote[][];
+    notes: INote[];
 
     volume: number;
     
     highlightNoteName: string;
 }
 
-interface IState {
-    notes: INote[];
-    frontBackTilt: number | null;
-    leftRightTilt: number | null;
+interface IProps {
+    exit: () => void;
+    profiles: IProfile[];
+}
+
+interface IState extends IProfile {
+    tilted: boolean;
 }
 
 export class Player extends Component<IProps, IState> {
@@ -27,14 +28,15 @@ export class Player extends Component<IProps, IState> {
     constructor(props: IProps) {
         super(props);
         this.state = {
-            notes: props.noteSets[0],
-            frontBackTilt: null,
-            leftRightTilt: null,
+            ...props.profiles[0],
+            tilted: false,
         };
     }
 
+    private tiltListener = (e: DeviceOrientationEvent) => this.updateTilt(e);
+
     async componentDidMount() {
-        this.audio.setVolume(this.props.volume);
+        this.audio.setVolume(this.state.volume); // TODO: change volume when configuration changes
 
         if (!(document as any).fullscreenElement) {
             await document.documentElement.requestFullscreen();
@@ -44,13 +46,8 @@ export class Player extends Component<IProps, IState> {
             }
         }
 
-        if ((window as any).DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', e => {
-                this.setState({
-                    frontBackTilt: e.beta,
-                    leftRightTilt: e.gamma,
-                });
-            })
+        if (this.props.profiles.length > 1 && (window as any).DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', this.tiltListener);
         }
     }
 
@@ -60,11 +57,33 @@ export class Player extends Component<IProps, IState> {
         if (document.exitFullscreen && (document as any).fullscreenElement) {
             document.exitFullscreen();
         }
+
+        if (this.props.profiles.length > 1) {
+            window.removeEventListener('deviceorientation', this.tiltListener);
+        }
     }
 
-    componentDidUpdate(prevProps: IProps, prevState: {}) {
-        if (this.props.volume !== prevProps.volume) {
-            this.audio.setVolume(this.props.volume);
+    private updateTilt(e: DeviceOrientationEvent) {
+        if (e.beta === null) {
+            return;
+        }
+
+        // if showing first set and tilted right, switch to second set
+        if (this.state.tilted) {
+            if (e.beta < 0) {
+                this.setState({
+                    ...this.props.profiles[0],
+                    tilted: false,
+                });
+            }
+        }
+        else {
+            if (e.beta > 0) {
+                this.setState({
+                    ...this.props.profiles[1],
+                    tilted: true,
+                });
+            }
         }
     }
 
@@ -76,29 +95,31 @@ export class Player extends Component<IProps, IState> {
 
         const noteButtons = this.renderNoteButtons(this.state.notes);
 
+        const classes = this.state.tilted
+            ? 'player player--tilted'
+            : 'player';
+
+        const tiltMessage = this.props.profiles.length < 2
+            ? <div className="player__tilt" />
+            : this.state.tilted
+                ? <div className="player__tilt">Tilt left for<br/>main profile</div>
+                : <div className="player__tilt">Tilt right for<br/>alternate profile</div>
+
         return (
-            <div className="player">
+            <div className={classes}>
                 {noteButtons}
 
-                <div className="player__middle">
-                    <div className="player__key">{this.props.keyName}</div>
+                <div className="player__key">{this.state.keyName}</div>
 
-                    <a
-                        className="player__back"
-                        href="#"
-                        onClick={backClicked}
-                    >
-                        Go back
-                    </a>
+                <a
+                    className="player__back"
+                    href="#"
+                    onClick={backClicked}
+                >
+                    Go back
+                </a>
 
-                    <div className="player__tilt">
-                        front-back tilt: {this.state.frontBackTilt}
-                    </div>
-
-                    <div className="player__tilt">
-                        left-right tilt: {this.state.leftRightTilt}
-                    </div>
-                </div>
+                {tiltMessage}
             </div>
         );
     }
@@ -110,7 +131,7 @@ export class Player extends Component<IProps, IState> {
             const start = () => this.audio.start(index, note.frequency);
             const stop = () => this.audio.stop(index);
 
-            const type = note.name === this.props.highlightNoteName
+            const type = note.name === this.state.highlightNoteName
                 ? ButtonType.HighlightNote
                 : ButtonType.Note;
         
