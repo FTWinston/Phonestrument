@@ -19,7 +19,7 @@ interface IProps {
 }
 
 interface IState extends IProfile {
-    tilted: boolean;
+    altProfile: boolean;
 }
 
 export class Player extends Component<IProps, IState> {
@@ -29,7 +29,7 @@ export class Player extends Component<IProps, IState> {
         super(props);
         this.state = {
             ...props.profiles[0],
-            tilted: false,
+            altProfile: false,
         };
     }
 
@@ -69,11 +69,11 @@ export class Player extends Component<IProps, IState> {
         }
 
         // if showing first set and tilted right, switch to second set
-        if (this.state.tilted) {
+        if (this.state.altProfile) {
             if (e.beta < 0) {
                 this.setState({
                     ...this.props.profiles[0],
-                    tilted: false,
+                    altProfile: false,
                 });
             }
         }
@@ -81,7 +81,7 @@ export class Player extends Component<IProps, IState> {
             if (e.beta > 0) {
                 this.setState({
                     ...this.props.profiles[1],
-                    tilted: true,
+                    altProfile: true,
                 });
             }
         }
@@ -95,13 +95,13 @@ export class Player extends Component<IProps, IState> {
 
         const noteButtons = this.renderNoteButtons(this.state.notes);
 
-        const classes = this.state.tilted
-            ? 'player player--tilted'
+        const classes = this.state.altProfile
+            ? 'player player--altProfile'
             : 'player';
 
         const tiltMessage = this.props.profiles.length < 2
             ? <div className="player__tilt" />
-            : this.state.tilted
+            : this.state.altProfile
                 ? <div className="player__tilt">Tilt left for<br/>main profile</div>
                 : <div className="player__tilt">Tilt right for<br/>alternate profile</div>
 
@@ -150,6 +150,7 @@ export class Player extends Component<IProps, IState> {
                 isRight={index >= 15}
                 isTop={index % 5 === 4}
                 type={type}
+                altProfile={this.state.altProfile}
             />
         });
     }

@@ -50,7 +50,7 @@
     background-color: #aa99ff;
 }
 
-.player--tilted .player__button--active {
+.player__button--active.player__button--altProfile {
     color: #666;
     background-color: #ffd599;
 }

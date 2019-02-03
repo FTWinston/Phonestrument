@@ -3,13 +3,11 @@ import React, { PureComponent } from 'react';
 export enum ButtonType {
     Note,
     HighlightNote,
-    OctaveDown,
-    OctaveUp,
 }
 
 interface IProps {
     text: string;
-    octave?: number;
+    octave: number;
     
     orderNum?: number;
     type: ButtonType;
@@ -18,12 +16,17 @@ interface IProps {
     isRight?: boolean;    
     isTop?: boolean;
 
+    altProfile: boolean;
+
     start: () => void;
     stop: () => void;
 }
 
 interface IState {
     active: boolean;
+    text: string;
+    octave: number;
+    altProfile: boolean; // keep this in the state so buttons "remember" what they were while pressed when the profile switches
 }
 
 export class PlayerButton extends PureComponent<IProps, IState> {
@@ -32,13 +35,29 @@ export class PlayerButton extends PureComponent<IProps, IState> {
 
         this.state = {
             active: false,
+            text: props.text,
+            octave: props.octave,
+            altProfile: props.altProfile,
         };
+    }
+
+    componentWillReceiveProps(nextProps: IProps) {
+        if (nextProps.altProfile !== this.props.altProfile && !this.state.active) {
+            this.setState({
+                text: nextProps.text,
+                octave: nextProps.octave,
+                altProfile: nextProps.altProfile,
+            });
+        }
     }
 
     render() {
         const touchStart = () => {
                 this.setState({
                     active: true,
+                    text: this.props.text,
+                    octave: this.props.octave,
+                    altProfile: this.props.altProfile,
                 });
                 
                 if (this.props.enabled !== false) {
@@ -49,6 +68,9 @@ export class PlayerButton extends PureComponent<IProps, IState> {
         const touchEnd = () => {
                 this.setState({
                     active: false,
+                    text: this.props.text,
+                    octave: this.props.octave,
+                    altProfile: this.props.altProfile,
                 });
 
                 if (this.props.enabled !== false) {
@@ -56,9 +78,15 @@ export class PlayerButton extends PureComponent<IProps, IState> {
                 }
             };
 
-        let classes = this.state.active
-            ? 'player__button player__button--active'
-            : 'player__button';
+        let classes = 'player__button';
+        
+        if (this.state.active) {
+            classes += ' player__button--active';
+        }
+
+        if (this.state.altProfile) {
+            classes += ' player__button--altProfile';
+        }
 
         if (this.props.enabled === false) {
             classes += ' player__button--disabled';
@@ -80,17 +108,7 @@ export class PlayerButton extends PureComponent<IProps, IState> {
             case ButtonType.HighlightNote:
                 classes += ' player__button--highlight';
                 break;
-            case ButtonType.OctaveDown:
-                classes += ' player__button--octaveDown';
-                break;
-            case ButtonType.OctaveUp:
-                classes += ' player__button--octaveUp';
-                break;
         }
-
-        const octave = this.props.octave === undefined
-            ? undefined
-            : <sub>{this.props.octave}</sub>
 
         const style = this.props.orderNum === undefined
             ? undefined
@@ -106,7 +124,7 @@ export class PlayerButton extends PureComponent<IProps, IState> {
                 onTouchEnd={touchEnd}
                 onTouchCancel={touchEnd}
             >
-                {this.props.text}{octave}
+                {this.state.text}<sub>{this.state.octave}</sub>
             </div>
         );
     }
