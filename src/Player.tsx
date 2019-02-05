@@ -37,30 +37,10 @@ export class Player extends Component<IProps, IState> {
 
     async componentDidMount() {
         this.audio.setVolume(this.state.volume); // TODO: change volume when configuration changes
-
-        if (!(document as any).fullscreenElement) {
-            await document.documentElement.requestFullscreen();
-            
-            if (screen && screen.orientation && screen.orientation.lock) {
-                await screen.orientation.lock('landscape'); // This causes an error in desktop Chrome, but never mind
-            }
-        }
-
-        if (this.props.profiles.length > 1 && (window as any).DeviceOrientationEvent) {
-            window.addEventListener('deviceorientation', this.tiltListener);
-        }
     }
 
     componentWillUnmount() {
         this.audio.stopAll();
-
-        if (document.exitFullscreen && (document as any).fullscreenElement) {
-            document.exitFullscreen();
-        }
-
-        if (this.props.profiles.length > 1) {
-            window.removeEventListener('deviceorientation', this.tiltListener);
-        }
     }
 
     private updateTilt(e: DeviceOrientationEvent) {

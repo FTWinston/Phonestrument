@@ -33,6 +33,7 @@ const scaleTypeVarName = 'scaleType', scaleType2VarName = 'scaleType2';
 const scaleNoteVarName = 'scaleNote', scaleNote2VarName = 'scaleNote2';
 const octaveVarName = 'octave', octave2VarName = 'octave2';
 const volumeVarName = 'volume', volume2VarName = 'volume2';
+const playedBeforeVarName = 'hasPlayedBefore';
 
 class App extends Component<{}, IState> {
     constructor(props: {}) {
@@ -43,7 +44,7 @@ class App extends Component<{}, IState> {
         const scaleType2 = this.loadScaleType(scaleType2VarName);
 
         this.state = {
-            display: Display.Home,
+            display: sessionStorage.getItem(playedBeforeVarName) === null ? Display.Home : Display.Play,
 
             scaleType: scaleType,
             scale: this.loadScale(scaleType, scaleNoteVarName),
@@ -149,7 +150,10 @@ class App extends Component<{}, IState> {
             />
         }
         else {
-            const play = () => this.setState({ display: Display.Play });
+            const play = () => {
+                sessionStorage.setItem(playedBeforeVarName, 'true');
+                this.setState({ display: Display.Play });
+            };
             const help = () => this.setState({ display: Display.Help });
 
             const setScaleType = (scaleType: IScaleType, isAlt: boolean) => {
