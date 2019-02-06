@@ -40,10 +40,12 @@ export class Configuration extends React.Component<IProps, {}> {
             this.props.back();
         };
 
-        const installClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
-            e.preventDefault();
-            this.props.back();
-        };
+        const installClicked = this.props.install === undefined
+            ? undefined
+            : (e: React.MouseEvent<HTMLAnchorElement>) => {
+                e.preventDefault();
+                this.props.install!();
+            };
 
         const selectPrimaryScaleType = (scaleType: IScaleType) => this.props.selectScaleType(scaleType, false);
         const selectPrimaryScale = (scale: IScale) => this.props.selectScale(scale, false);
