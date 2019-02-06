@@ -3,6 +3,7 @@ import { IScale, IScaleType } from '../functionality/Scales';
 import logo from './logo.svg';
 import './Home.css';
 import { ProfileSettings } from './ProfileSettings';
+import { Help, Play } from './Icons';
 
 interface IProps {
     play: () => void;
@@ -83,7 +84,7 @@ export class Home extends React.Component<IProps, {}> {
                         href="#"
                         onClick={helpClicked}
                     >
-                        Instructions
+                        <Help /> Instructions
                     </a>
                     
                     <a
@@ -91,7 +92,7 @@ export class Home extends React.Component<IProps, {}> {
                         href="#"
                         onClick={playClicked}
                     >
-                        Play now
+                        <Play /> Play now
                     </a>
                 </div>
 

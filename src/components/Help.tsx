@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Home } from './Icons';
 
 interface IProps {
     back: () => void;
@@ -44,7 +45,7 @@ export class Help extends React.Component<IProps, {}> {
                         href="#"
                         onClick={backClicked}
                     >
-                        Go back
+                        <Home /> Go back
                     </a>
                 </div>
             </div>

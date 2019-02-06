@@ -71,16 +71,38 @@
 .player__back {
     grid-column: 3;
     grid-row: 2;
-    text-align: center;
-    color: #aa99ff;
-    text-align: center;
 }
 
 .player__tilt {
     grid-column: 3;
     grid-row-start: 3;
     grid-row-end: 6;
-    text-align: center;
+}
+
+.player__back,
+.player__tilt,
+.player__tiltMessage1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.player__tilt {
+    flex-direction: column;
+}
+
+.player__back > svg,
+.player__tiltMessage1 > svg {
+    margin-right: 0.25em;
+}
+
+.player__tilt svg {
+    color: #ffd599;
+}
+
+.player--altProfile .player__tilt svg {
+    color: #aa99ff;
 }
 
 .player__spacer {

@@ -3,6 +3,7 @@ import { PlayerButton, ButtonType } from './PlayerButton';
 import { INote } from '../functionality/Notes';
 import { Audio } from '../functionality/Audio';
 import './Player.css';
+import { Home, TiltLeft, TiltRight } from './Icons';
 
 export interface IProfile {
     keyName: string;
@@ -82,8 +83,8 @@ export class Player extends React.Component<IProps, IState> {
         const tiltMessage = this.props.profiles.length < 2
             ? <div className="player__tilt" />
             : this.state.altProfile
-                ? <div className="player__tilt">Tilt left for<br/>main profile</div>
-                : <div className="player__tilt">Tilt right for<br/>alternate profile</div>
+                ? <div className="player__tilt"><div className="player__tiltMessage1"><TiltLeft /> Tilt left</div><div>for {this.props.profiles[0].keyName}</div></div>
+                : <div className="player__tilt"><div className="player__tiltMessage1"><TiltRight />Tilt right</div><div>for {this.props.profiles[1].keyName}</div></div>
 
         return (
             <div className={classes}>
@@ -96,7 +97,7 @@ export class Player extends React.Component<IProps, IState> {
                     href="#"
                     onClick={backClicked}
                 >
-                    Go back
+                    <Home /> Go back
                 </a>
 
                 {tiltMessage}

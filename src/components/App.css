@@ -15,3 +15,11 @@ select {
     background-color: #282c34;
     color: white;
 }
+
+a {
+    color: #aa99ff;
+}
+
+a:active {
+    color: white;
+}

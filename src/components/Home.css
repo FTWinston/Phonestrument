@@ -45,7 +45,12 @@
 }
 
 .site__link {
-    color: #aa99ff;
+    display: flex;
+    align-items: center;
+}
+
+.site__link > svg {
+    margin-right: 0.25em;
 }
 
 .site__options {
