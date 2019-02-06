@@ -91,8 +91,8 @@ export class Player extends React.Component<IProps, IState> {
         const tiltMessage = this.props.profiles.length < 2
             ? <div className="player__tilt" />
             : this.state.altProfile
-                ? <div className="player__tilt"><div className="player__tiltMessage1"><TiltLeft /> Tilt left</div><div>for {this.props.profiles[0].keyName}</div></div>
-                : <div className="player__tilt"><div className="player__tiltMessage1"><TiltRight />Tilt right</div><div>for {this.props.profiles[1].keyName}</div></div>
+                ? <div className="player__tilt"><TiltLeft /> Tilt left<br />for {this.props.profiles[0].keyName}</div>
+                : <div className="player__tilt"><TiltRight />Tilt right<br />for {this.props.profiles[1].keyName}</div>
 
         return (
             <div className={classes}>

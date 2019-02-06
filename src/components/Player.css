@@ -90,10 +90,10 @@
 
 .player__tilt {
     flex-direction: column;
+    text-align: center;
 }
 
-.player__back > svg,
-.player__tiltMessage1 > svg {
+.player__back > svg {
     margin-right: 0.25em;
 }
 
