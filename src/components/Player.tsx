@@ -38,10 +38,18 @@ export class Player extends React.Component<IProps, IState> {
 
     async componentDidMount() {
         this.audio.setVolume(this.state.volume); // TODO: change volume when configuration changes
+         
+        if (this.props.profiles.length > 1 && (window as any).DeviceOrientationEvent) {
+            window.addEventListener('deviceorientation', this.tiltListener);
+        }
     }
 
     componentWillUnmount() {
         this.audio.stopAll();
+         
+        if (this.props.profiles.length > 1) {
+            window.removeEventListener('deviceorientation', this.tiltListener);
+        }
     }
 
     private updateTilt(e: DeviceOrientationEvent) {
