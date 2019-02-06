@@ -23,3 +23,10 @@ a {
 a:active {
     color: white;
 }
+
+
+@media (orientation: portrait) {
+    body {
+        transform: rotate(90deg);
+    }
+}

@@ -16,7 +16,7 @@
 
 .player__button {
     box-sizing: border-box;
-    border-radius: 2vh;
+    border-radius: 2vmin;
     background-color: #ddd;
     display: inline-block;
     color: black;
