@@ -1,5 +1,6 @@
 .site {
-    min-height: 100vh;
+    width: 100vmax;
+    min-height: 100vmin;
     text-align: center;
     display: flex;
     flex-direction: column;
