@@ -6,11 +6,13 @@ import { Help } from './Help';
 import { octaves } from '../functionality/Notes';
 import { determineNotes } from '../functionality/determineNotes';
 import './App.css';
+import { Configuration } from './Configuration';
 
 enum Display {
     Home,
     Help,
     Play,
+    Config,
 }
 
 interface IState {
@@ -126,6 +128,7 @@ class App extends React.Component<{}, IState> {
         }
         else if (this.state.display === Display.Play) {
             const exit = () => this.setState({ display: Display.Home });
+            const configure = () => this.setState({ display: Display.Config });
 
             const profiles: IProfile[] = [
                 {
@@ -146,16 +149,17 @@ class App extends React.Component<{}, IState> {
             }
 
             return <Player
-                exit={exit}
+                goHome={exit}
+                configure={configure}
                 profiles={profiles}
             />
         }
-        else {
+        else if (this.state.display === Display.Config) {
             const play = () => {
                 sessionStorage.setItem(playedBeforeVarName, 'true');
                 this.setState({ display: Display.Play });
             };
-            const help = () => this.setState({ display: Display.Help });
+            const back = () => this.setState({ display: Display.Home });
 
             const setScaleType = (scaleType: IScaleType, isAlt: boolean) => {
                 const scaleIndex = this.state.scaleType.scales.indexOf(isAlt ? this.state.scale2 : this.state.scale);
@@ -219,9 +223,9 @@ class App extends React.Component<{}, IState> {
                 this.setState({ useSplitProfile: useSplit });
             }
 
-            return <Home
-                help={help}
+            return <Configuration
                 play={play}
+                back={back}
 
                 useSplitProfile={this.state.useSplitProfile}
                 setUseSplitProfile={setSplit}
@@ -241,6 +245,20 @@ class App extends React.Component<{}, IState> {
                 volume={this.state.volume}
                 volume2={this.state.volume2}
                 setVolume={setVolume}
+            />
+        }
+        else {
+            const play = () => {
+                sessionStorage.setItem(playedBeforeVarName, 'true');
+                this.setState({ display: Display.Play });
+            };
+            const configure = () => this.setState({ display: Display.Config });
+            const help = () => this.setState({ display: Display.Help });
+
+            return <Home
+                help={help}
+                play={play}
+                configure={configure}
             />
         }
     }

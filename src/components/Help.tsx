@@ -45,7 +45,7 @@ export class Help extends React.Component<IProps, {}> {
                         href="#"
                         onClick={backClicked}
                     >
-                        <Home /> Go back
+                        <Home /> Home
                     </a>
                 </div>
             </div>

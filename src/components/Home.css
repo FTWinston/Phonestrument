@@ -10,7 +10,7 @@
 
 .site__logo {
     animation: App-logo-spin infinite 20s linear;
-    height: 30vmin;
+    height: 40vmin;
 }
 
 .site__header {
@@ -31,6 +31,7 @@
     margin-top: 0;
     margin-bottom: 0.25em;
     text-transform: uppercase;
+    font-size: 2em;
 }
 
 .site__header p {
@@ -40,7 +41,7 @@
 .site__links {
     display: flex;
     justify-content: space-around;
-    width: 16em;
+    width: 26em;
     margin: 0.5em 0;
 }
 

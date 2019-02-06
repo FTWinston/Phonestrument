@@ -68,7 +68,7 @@
     font-weight: bold;
 }
 
-.player__back {
+.player__config {
     grid-column: 3;
     grid-row: 2;
 }
@@ -79,9 +79,8 @@
     grid-row-end: 6;
 }
 
-.player__back,
-.player__tilt,
-.player__tiltMessage1 {
+.player__config,
+.player__tilt {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,7 +92,8 @@
     text-align: center;
 }
 
-.player__back > svg {
+.player__back > svg,
+.player__config > svg {
     margin-right: 0.25em;
 }
 

@@ -3,7 +3,7 @@ import { PlayerButton, ButtonType } from './PlayerButton';
 import { INote } from '../functionality/Notes';
 import { Audio } from '../functionality/Audio';
 import './Player.css';
-import { Home, TiltLeft, TiltRight } from './Icons';
+import { TiltLeft, TiltRight, Configure } from './Icons';
 
 export interface IProfile {
     keyName: string;
@@ -15,7 +15,8 @@ export interface IProfile {
 }
 
 interface IProps {
-    exit: () => void;
+    goHome: () => void;
+    configure: () => void;
     profiles: IProfile[];
 }
 
@@ -77,9 +78,9 @@ export class Player extends React.Component<IProps, IState> {
     }
 
     render() {
-        const backClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
+        const configClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault();
-            this.props.exit();
+            this.props.configure();
         };
 
         const noteButtons = this.renderNoteButtons(this.state.notes);
@@ -101,11 +102,11 @@ export class Player extends React.Component<IProps, IState> {
                 <div className="player__key">{this.state.keyName}</div>
 
                 <a
-                    className="player__back"
+                    className="player__config"
                     href="#"
-                    onClick={backClicked}
+                    onClick={configClicked}
                 >
-                    <Home /> Go back
+                    <Configure /> Configure
                 </a>
 
                 {tiltMessage}
