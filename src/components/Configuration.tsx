@@ -40,6 +40,11 @@ export class Configuration extends React.Component<IProps, {}> {
             this.props.back();
         };
 
+        const installClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
+            e.preventDefault();
+            this.props.back();
+        };
+
         const selectPrimaryScaleType = (scaleType: IScaleType) => this.props.selectScaleType(scaleType, false);
         const selectPrimaryScale = (scale: IScale) => this.props.selectScale(scale, false);
         const setPrimaryOctave = (octave: number) => this.props.setOctave(octave, false);
@@ -69,7 +74,7 @@ export class Configuration extends React.Component<IProps, {}> {
 
         const installLink = this.props.install === undefined
             ? undefined
-            : <a className="site__link" href="#" onClick={playClicked}>
+            : <a className="site__link" href="#" onClick={installClicked}>
                 <Install /> Add to home screen
             </a>
 
