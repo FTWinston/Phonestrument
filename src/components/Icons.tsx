@@ -4,3 +4,4 @@ export const Play = require('-!svg-react-loader?name=Icon!feather-icons/dist/ico
 export const Configure = require('-!svg-react-loader?name=Icon!feather-icons/dist/icons/sliders.svg');
 export const TiltLeft = require('-!svg-react-loader?name=Icon!feather-icons/dist/icons/rotate-ccw.svg');
 export const TiltRight = require('-!svg-react-loader?name=Icon!feather-icons/dist/icons/rotate-cw.svg');
+export const Install = require('-!svg-react-loader?name=Icon!feather-icons/dist/icons/star.svg');

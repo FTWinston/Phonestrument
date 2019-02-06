@@ -17,6 +17,7 @@ enum Display {
 
 interface IState {
     display: Display;
+    installPrompt?: Event;
 
     scaleType: IScaleType;
     scale: IScale;
@@ -61,6 +62,21 @@ class App extends React.Component<{}, IState> {
             octave2: this.loadOctave(octave2VarName),
             volume2: this.loadVolume(volume2VarName),
         };
+    }
+
+    componentDidMount() {
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.setState({
+                installPrompt: e,
+            });
+        });
+
+        window.addEventListener('appinstalled', (evt) => {
+            this.setState({
+                installPrompt: undefined,
+            });
+        });
     }
 
     private loadScaleType(sessionVarName: string) {
@@ -161,6 +177,10 @@ class App extends React.Component<{}, IState> {
             };
             const back = () => this.setState({ display: Display.Home });
 
+            const install = this.state.installPrompt === undefined
+                ? undefined
+                : () => (this.state.installPrompt as any).prompt();
+
             const setScaleType = (scaleType: IScaleType, isAlt: boolean) => {
                 const scaleIndex = this.state.scaleType.scales.indexOf(isAlt ? this.state.scale2 : this.state.scale);
                 const newScale = scaleIndex >= 0 && scaleIndex < scaleType.scales.length
@@ -226,6 +246,7 @@ class App extends React.Component<{}, IState> {
             return <Configuration
                 play={play}
                 back={back}
+                install={install}
 
                 useSplitProfile={this.state.useSplitProfile}
                 setUseSplitProfile={setSplit}

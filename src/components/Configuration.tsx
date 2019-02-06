@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { IScale, IScaleType } from '../functionality/Scales';
 import { ProfileSettings } from './ProfileSettings';
-import { Play, Home } from './Icons';
+import { Play, Home, Install } from './Icons';
 
 interface IProps {
     play: () => void;
     back: () => void;
+    install?: () => void;
     
     useSplitProfile: boolean;
     setUseSplitProfile: (use: boolean) => void;
@@ -66,6 +67,12 @@ export class Configuration extends React.Component<IProps, {}> {
             />
             : undefined;
 
+        const installLink = this.props.install === undefined
+            ? undefined
+            : <a className="site__link" href="#" onClick={playClicked}>
+                <Install /> Add to home screen
+            </a>
+
         return (
             <div className="site site--configuration">
                 <header className="site__header">
@@ -113,6 +120,8 @@ export class Configuration extends React.Component<IProps, {}> {
                     >
                         <Play /> Play now
                     </a>
+
+                    {installLink}
                 </div>
             </div>
         );
