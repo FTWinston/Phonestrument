@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { IScale, scaleTypes, IScaleType } from './Scales';
+import * as React from 'react';
+import { IScale, IScaleType } from '../functionality/Scales';
 import logo from './logo.svg';
-import './Site.css';
+import './Home.css';
 import { ProfileSettings } from './ProfileSettings';
 
 interface IProps {
@@ -28,7 +28,7 @@ interface IProps {
     setVolume: (vol: number, isAlt: boolean) => void;
 }
 
-export class Site extends Component<IProps, {}> {
+export class Home extends React.Component<IProps, {}> {
     render() {
         const helpClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault();

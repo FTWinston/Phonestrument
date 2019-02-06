@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { IScale, scaleTypes, IScaleType } from './Scales';
-import './Site.css';
+import * as React from 'react';
+import { IScale, scaleTypes, IScaleType } from '../functionality/Scales';
 
 interface IProps {
     isAlternate: boolean;
@@ -18,7 +17,7 @@ interface IProps {
     setVolume: (vol: number) => void;
 }
 
-export class ProfileSettings extends Component<IProps, {}> {
+export class ProfileSettings extends React.Component<IProps, {}> {
     render() {
         const selectedScaleTypeIndex = scaleTypes.indexOf(this.props.scaleType);
         const selectedScaleNoteIndex = this.props.scaleType.scales.indexOf(this.props.scale);

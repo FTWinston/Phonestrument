@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Player, IProfile } from './Player';
-import { Site } from './Site';
-import { IScale, scaleTypes, IScaleType } from './Scales';
+import { Home } from './Home';
+import { IScale, scaleTypes, IScaleType } from '../functionality/Scales';
 import { Help } from './Help';
-import { octaves } from './Notes';
-import { determineNotes } from './determineNotes';
+import { octaves } from '../functionality/Notes';
+import { determineNotes } from '../functionality/determineNotes';
+import './App.css';
 
 enum Display {
     Home,
@@ -35,7 +36,7 @@ const octaveVarName = 'octave', octave2VarName = 'octave2';
 const volumeVarName = 'volume', volume2VarName = 'volume2';
 const playedBeforeVarName = 'hasPlayedBefore';
 
-class App extends Component<{}, IState> {
+class App extends React.Component<{}, IState> {
     constructor(props: {}) {
         super(props);
 
@@ -218,7 +219,7 @@ class App extends Component<{}, IState> {
                 this.setState({ useSplitProfile: useSplit });
             }
 
-            return <Site
+            return <Home
                 help={help}
                 play={play}
 

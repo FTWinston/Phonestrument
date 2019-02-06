@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 
 interface IProps {
     back: () => void;
 }
 
-export class Help extends Component<IProps, {}> {
+export class Help extends React.Component<IProps, {}> {
     render() {
         const backClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
             e.preventDefault();

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { PlayerButton, ButtonType } from './PlayerButton';
-import { INote } from './Notes';
+import { INote } from '../functionality/Notes';
+import { Audio } from '../functionality/Audio';
 import './Player.css';
-import { Audio } from './Audio';
 
 export interface IProfile {
     keyName: string;
@@ -22,7 +22,7 @@ interface IState extends IProfile {
     altProfile: boolean;
 }
 
-export class Player extends Component<IProps, IState> {
+export class Player extends React.Component<IProps, IState> {
     private audio = new Audio();
 
     constructor(props: IProps) {

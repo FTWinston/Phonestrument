@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 
 export enum ButtonType {
     Note,
@@ -29,7 +29,7 @@ interface IState {
     altProfile: boolean; // keep this in the state so buttons "remember" what they were while pressed when the profile switches
 }
 
-export class PlayerButton extends PureComponent<IProps, IState> {
+export class PlayerButton extends React.PureComponent<IProps, IState> {
     constructor(props: IProps) {
         super(props);
 
