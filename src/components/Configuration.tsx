@@ -2,6 +2,7 @@ import * as React from 'react';
 import { IScale, IScaleType } from '../functionality/Scales';
 import { ProfileSettings } from './ProfileSettings';
 import { Play, Home, Install } from './Icons';
+import { IVoice } from '../functionality/Voices';
 
 interface IProps {
     play: () => void;
@@ -26,6 +27,10 @@ interface IProps {
     volume: number;
     volume2: number;
     setVolume: (vol: number, isAlt: boolean) => void;
+
+    voice: IVoice;
+    voice2: IVoice;
+    setVoice: (voice: IVoice, isAlt: boolean) => void;
 }
 
 export class Configuration extends React.Component<IProps, {}> {
@@ -51,6 +56,7 @@ export class Configuration extends React.Component<IProps, {}> {
         const selectPrimaryScale = (scale: IScale) => this.props.selectScale(scale, false);
         const setPrimaryOctave = (octave: number) => this.props.setOctave(octave, false);
         const setPrimaryVolume = (volume: number) => this.props.setVolume(volume, false);
+        const setPrimaryVoice = (voice: IVoice) => this.props.setVoice(voice, false);
 
         const switchSplitProfile = (e: React.ChangeEvent<HTMLInputElement>) => this.props.setUseSplitProfile(e.target.checked);
 
@@ -58,6 +64,7 @@ export class Configuration extends React.Component<IProps, {}> {
         const selectAlternateScale = (scale: IScale) => this.props.selectScale(scale, true);
         const setAlternateOctave = (octave: number) => this.props.setOctave(octave, true);
         const setAlternateVolume = (volume: number) => this.props.setVolume(volume, true);
+        const setAlternateVoice = (voice: IVoice) => this.props.setVoice(voice, true);
 
         const alternateSettings = this.props.useSplitProfile
             ? <ProfileSettings
@@ -66,11 +73,13 @@ export class Configuration extends React.Component<IProps, {}> {
                 scale={this.props.scale2}
                 octave={this.props.octave2}
                 volume={this.props.volume2}
+                voice={this.props.voice2}
 
                 selectScaleType={selectAlternateScaleType}
                 selectScale={selectAlternateScale}
                 setOctave={setAlternateOctave}
                 setVolume={setAlternateVolume}
+                selectVoice={setAlternateVoice}
             />
             : undefined;
 
@@ -94,11 +103,13 @@ export class Configuration extends React.Component<IProps, {}> {
                     scale={this.props.scale}
                     octave={this.props.octave}
                     volume={this.props.volume}
+                    voice={this.props.voice}
 
                     selectScaleType={selectPrimaryScaleType}
                     selectScale={selectPrimaryScale}
                     setOctave={setPrimaryOctave}
                     setVolume={setPrimaryVolume}
+                    selectVoice={setPrimaryVoice}
                 />
 
                 <label className="site__useAlt">

@@ -58,7 +58,7 @@
 .site__options {
     margin-top: 0.5em;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr;
     grid-row-gap: 0.5em;
     grid-column-gap: 2em;

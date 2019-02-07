@@ -7,6 +7,7 @@ import { octaves } from '../functionality/Notes';
 import { determineNotes } from '../functionality/determineNotes';
 import './App.css';
 import { Configuration } from './Configuration';
+import { IVoice, voices } from '../functionality/Voices';
 
 enum Display {
     Home,
@@ -23,6 +24,7 @@ interface IState {
     scale: IScale;
     octave: number;
     volume: number;
+    voice: IVoice;
 
     useSplitProfile: boolean;
 
@@ -30,6 +32,7 @@ interface IState {
     scale2: IScale;
     octave2: number;
     volume2: number;
+    voice2: IVoice;
 }
 
 const splitVarName = 'useSplit';
@@ -37,6 +40,7 @@ const scaleTypeVarName = 'scaleType', scaleType2VarName = 'scaleType2';
 const scaleNoteVarName = 'scaleNote', scaleNote2VarName = 'scaleNote2';
 const octaveVarName = 'octave', octave2VarName = 'octave2';
 const volumeVarName = 'volume', volume2VarName = 'volume2';
+const voiceVarName = 'voice', voice2VarName = 'voice2';
 const playedBeforeVarName = 'hasPlayedBefore';
 
 class App extends React.Component<{}, IState> {
@@ -54,6 +58,7 @@ class App extends React.Component<{}, IState> {
             scale: this.loadScale(scaleType, scaleNoteVarName),
             octave: this.loadOctave(octaveVarName),
             volume: this.loadVolume(volumeVarName),
+            voice: this.loadVoice(voiceVarName),
 
             useSplitProfile: this.loadUseSplit(splitVarName),
 
@@ -61,6 +66,7 @@ class App extends React.Component<{}, IState> {
             scale2: this.loadScale(scaleType2, scaleNote2VarName),
             octave2: this.loadOctave(octave2VarName),
             volume2: this.loadVolume(volume2VarName),
+            voice2: this.loadVoice(voice2VarName),
         };
     }
 
@@ -127,7 +133,22 @@ class App extends React.Component<{}, IState> {
                 return value;
             }
         }
+
         return 0.1;
+    }
+
+    private loadVoice(sessionVarName: string) {
+        const savedVoiceName = sessionStorage.getItem(sessionVarName);
+
+        if (savedVoiceName !== null) {
+            const voice = voices.find(v => v.name === savedVoiceName);
+            
+            if (voice !== undefined) {
+                return voice;
+            }
+        }
+
+        return voices[0];
     }
 
     private loadUseSplit(sessionVarName: string) {
@@ -152,15 +173,17 @@ class App extends React.Component<{}, IState> {
                     highlightNoteName: this.state.scale.name,
                     keyName: `${this.state.scale.name} ${this.state.scaleType.name}`,
                     volume: this.state.volume,
+                    voice: this.state.voice,
                 }
             ];
 
             if (this.state.useSplitProfile) {
                 profiles.push({
-                        notes: determineNotes(this.state.scale2, this.state.scaleType2, this.state.octave2),
-                        highlightNoteName: this.state.scale2.name,
-                        keyName: `${this.state.scale2.name} ${this.state.scaleType2.name}`,
-                        volume: this.state.volume2,
+                    notes: determineNotes(this.state.scale2, this.state.scaleType2, this.state.octave2),
+                    highlightNoteName: this.state.scale2.name,
+                    keyName: `${this.state.scale2.name} ${this.state.scaleType2.name}`,
+                    volume: this.state.volume2,
+                    voice: this.state.voice2,
                 });
             }
 
@@ -238,6 +261,17 @@ class App extends React.Component<{}, IState> {
                 }
             };
 
+            const setVoice = (voice: IVoice, isAlt: boolean) => {
+                if (isAlt) {
+                    sessionStorage.setItem(voice2VarName, voice.name);
+                    this.setState({ voice2: voice });
+                }
+                else {
+                    sessionStorage.setItem(voiceVarName, voice.name);
+                    this.setState({ voice: voice });
+                }
+            };
+
             const setSplit = (useSplit: boolean) => {
                 sessionStorage.setItem(splitVarName, useSplit.toString());
                 this.setState({ useSplitProfile: useSplit });
@@ -266,6 +300,10 @@ class App extends React.Component<{}, IState> {
                 volume={this.state.volume}
                 volume2={this.state.volume2}
                 setVolume={setVolume}
+
+                voice={this.state.voice}
+                voice2={this.state.voice2}
+                setVoice={setVoice}
             />
         }
         else {

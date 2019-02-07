@@ -4,12 +4,15 @@ import { INote } from '../functionality/Notes';
 import { Audio } from '../functionality/Audio';
 import './Player.css';
 import { TiltLeft, TiltRight, Configure } from './Icons';
+import { IVoice } from '../functionality/Voices';
 
 export interface IProfile {
     keyName: string;
     notes: INote[];
 
     volume: number;
+    
+    voice: IVoice;
     
     highlightNoteName: string;
 }
@@ -38,7 +41,8 @@ export class Player extends React.Component<IProps, IState> {
     private tiltListener = (e: DeviceOrientationEvent) => this.updateTilt(e);
 
     async componentDidMount() {
-        this.audio.setVolume(this.state.volume); // TODO: change volume when configuration changes
+        this.audio.setVolume(this.state.volume);
+        this.audio.setVoice(this.state.voice);
          
         if (this.props.profiles.length > 1 && (window as any).DeviceOrientationEvent) {
             window.addEventListener('deviceorientation', this.tiltListener);

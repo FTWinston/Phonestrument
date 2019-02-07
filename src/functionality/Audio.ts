@@ -1,4 +1,5 @@
 import { INote } from "./Notes";
+import { IVoice } from "./Voices";
 
 //const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
 
@@ -11,6 +12,11 @@ export class Audio {
     private readonly audioCtx: AudioContext;
     private readonly gain: GainNode;
     private oscillators: { [key:number]: INoteOscillator; } = {};
+
+    private voice: IVoice = {
+        name: 'Default',
+        apply: o => { o.type = 'sine'; return o; },
+    };
 
     constructor() {
         this.audioCtx = new AudioContext();
@@ -32,6 +38,10 @@ export class Audio {
         this.gain.gain.setValueAtTime(volume, this.audioCtx.currentTime);
     }
 
+    public setVoice(voice: IVoice) {
+        this.voice = voice;
+    }
+
     public start(key: number, frequency: number) {
         let noteOscillator = this.oscillators[key];
 
@@ -41,15 +51,15 @@ export class Audio {
         }
 
         const oscillator = this.audioCtx.createOscillator();
+        this.voice.apply(oscillator);
 
-        oscillator.type = 'sine';
         oscillator.frequency.setValueAtTime(frequency, this.audioCtx.currentTime);
         oscillator.start();
 
         const noteGain = this.audioCtx.createGain();
         oscillator.connect(noteGain);
-
-        noteGain.connect(this.gain)
+        noteGain.connect(this.gain);
+        
         this.oscillators[key] = {
             oscillator: oscillator,
             gain: noteGain,
