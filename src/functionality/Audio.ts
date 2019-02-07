@@ -15,7 +15,17 @@ export class Audio {
     constructor() {
         this.audioCtx = new AudioContext();
         this.gain = this.audioCtx.createGain();
-        this.gain.connect(this.audioCtx.destination);
+
+        const compressor = this.audioCtx.createDynamicsCompressor();
+        compressor.threshold.setValueAtTime(-50, this.audioCtx.currentTime);
+        compressor.knee.setValueAtTime(40, this.audioCtx.currentTime);
+        compressor.ratio.setValueAtTime(12, this.audioCtx.currentTime);
+        compressor.attack.setValueAtTime(0, this.audioCtx.currentTime);
+        compressor.release.setValueAtTime(0.25, this.audioCtx.currentTime);
+
+        this.gain.connect(compressor);
+
+        compressor.connect(this.audioCtx.destination);
     }
 
     public setVolume(volume: number) {
