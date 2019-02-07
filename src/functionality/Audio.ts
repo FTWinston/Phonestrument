@@ -56,7 +56,12 @@ export class Audio {
         oscillator.frequency.setValueAtTime(frequency, this.audioCtx.currentTime);
         oscillator.start();
 
+        const weightedDecibels = this.determineWeighting(frequency);
+        const weightedGain = 1 / Math.pow(10, weightedDecibels / 20);
+        
         const noteGain = this.audioCtx.createGain();
+        noteGain.gain.setValueAtTime(weightedGain, this.audioCtx.currentTime);
+        
         oscillator.connect(noteGain);
         noteGain.connect(this.gain);
         
@@ -97,5 +102,16 @@ export class Audio {
             noteOscillator.oscillator.stop();
             noteOscillator.gain.disconnect(this.gain);
         }, 25);
+    }
+
+    private determineWeighting(frequency: number) {
+        // This is the A-weighting, to make notes of different pitches have the same apparent volume.
+        // See http://www.diracdelta.co.uk/science/source/a/w/aweighting/source.html
+
+        const fSquared = frequency * frequency;
+        const x = (1.562339 * fSquared * fSquared) / ((fSquared + 11589.093052) * (fSquared + 544440.670461));
+        const y = (22428810000000000 * fSquared * fSquared) / ((fSquared + 424.318677406) * (fSquared + 424.318677406) * (fSquared + 148699001.408) * (fSquared + 148699001.408));
+
+        return Math.log10(x) + Math.log10(y);
     }
 }
