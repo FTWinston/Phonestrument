@@ -57,6 +57,16 @@ export class Player extends React.Component<IProps, IState> {
         }
     }
 
+    componentDidUpdate(prevProps: IProps, prevState: IState) {
+        if (prevState.volume !== this.state.volume) {
+            this.audio.setVolume(this.state.volume);
+        }
+
+        if (prevState.voice !== this.state.voice) {
+            this.audio.setVoice(this.state.voice);
+        }
+    }
+
     private updateTilt(e: DeviceOrientationEvent) {
         if (e.beta === null) {
             return;
