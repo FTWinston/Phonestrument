@@ -52,7 +52,7 @@ class App extends React.Component<{}, IState> {
         const scaleType2 = this.loadScaleType(scaleType2VarName);
 
         this.state = {
-            display: sessionStorage.getItem(playedBeforeVarName) === null ? Display.Home : Display.Play,
+            display: localStorage.getItem(playedBeforeVarName) === null ? Display.Home : Display.Play,
 
             scaleType: scaleType,
             scale: this.loadScale(scaleType, scaleNoteVarName),
@@ -86,7 +86,7 @@ class App extends React.Component<{}, IState> {
     }
 
     private loadScaleType(sessionVarName: string) {
-        const savedScaleType = sessionStorage.getItem(sessionVarName);
+        const savedScaleType = localStorage.getItem(sessionVarName);
 
         if (savedScaleType !== null) {
             const match = scaleTypes.filter(s => s.name === savedScaleType);
@@ -99,7 +99,7 @@ class App extends React.Component<{}, IState> {
     }
 
     private loadScale(scaleType: IScaleType, sessionVarName: string) {
-        const savedScale = sessionStorage.getItem(sessionVarName);
+        const savedScale = localStorage.getItem(sessionVarName);
 
         if (savedScale !== null) {
             const match = scaleType.scales.filter(s => s.name === savedScale);
@@ -112,7 +112,7 @@ class App extends React.Component<{}, IState> {
     }
 
     private loadOctave(sessionVarName: string) {
-        const savedOctave = sessionStorage.getItem(sessionVarName);
+        const savedOctave = localStorage.getItem(sessionVarName);
 
         if (savedOctave !== null) {
             const value = parseInt(savedOctave);
@@ -125,7 +125,7 @@ class App extends React.Component<{}, IState> {
     }
 
     private loadVolume(sessionVarName: string) {
-        const savedVol = sessionStorage.getItem(sessionVarName);
+        const savedVol = localStorage.getItem(sessionVarName);
 
         if (savedVol !== null) {
             const value = parseFloat(savedVol);
@@ -138,7 +138,7 @@ class App extends React.Component<{}, IState> {
     }
 
     private loadVoice(sessionVarName: string) {
-        const savedVoiceName = sessionStorage.getItem(sessionVarName);
+        const savedVoiceName = localStorage.getItem(sessionVarName);
 
         if (savedVoiceName !== null) {
             const voice = voices.find(v => v.name === savedVoiceName);
@@ -152,7 +152,7 @@ class App extends React.Component<{}, IState> {
     }
 
     private loadUseSplit(sessionVarName: string) {
-        return sessionStorage.getItem(sessionVarName) === 'true';
+        return localStorage.getItem(sessionVarName) === 'true';
     }
 
     render() {
@@ -195,7 +195,7 @@ class App extends React.Component<{}, IState> {
         }
         else if (this.state.display === Display.Config) {
             const play = () => {
-                sessionStorage.setItem(playedBeforeVarName, 'true');
+                localStorage.setItem(playedBeforeVarName, 'true');
                 this.setState({ display: Display.Play });
             };
             const back = () => this.setState({ display: Display.Home });
@@ -211,7 +211,7 @@ class App extends React.Component<{}, IState> {
                     : scaleType.scales[0];
 
                 if (isAlt) {
-                    sessionStorage.setItem(scaleType2VarName, scaleType.name);
+                    localStorage.setItem(scaleType2VarName, scaleType.name);
 
                     this.setState({
                         scaleType2: scaleType,
@@ -219,7 +219,7 @@ class App extends React.Component<{}, IState> {
                     });
                 }
                 else {
-                    sessionStorage.setItem(scaleTypeVarName, scaleType.name);
+                    localStorage.setItem(scaleTypeVarName, scaleType.name);
 
                     this.setState({
                         scaleType: scaleType,
@@ -230,50 +230,50 @@ class App extends React.Component<{}, IState> {
 
             const setScale = (scale: IScale, isAlt: boolean) => {
                 if (isAlt) {
-                    sessionStorage.setItem(scaleNote2VarName, scale.name);
+                    localStorage.setItem(scaleNote2VarName, scale.name);
                     this.setState({ scale2: scale });
                 }
                 else {
-                    sessionStorage.setItem(scaleNoteVarName, scale.name);
+                    localStorage.setItem(scaleNoteVarName, scale.name);
                     this.setState({ scale: scale });
                 }
             };
 
             const setOctave = (octave: number, isAlt: boolean) => {
                 if (isAlt) {
-                    sessionStorage.setItem(octave2VarName, octave.toString());
+                    localStorage.setItem(octave2VarName, octave.toString());
                     this.setState({ octave2: octave });
                 }
                 else {
-                    sessionStorage.setItem(octaveVarName, octave.toString());
+                    localStorage.setItem(octaveVarName, octave.toString());
                     this.setState({ octave: octave });
                 }
             };
 
             const setVolume = (vol: number, isAlt: boolean) => {
                 if (isAlt) {
-                    sessionStorage.setItem(volume2VarName, vol.toString());
+                    localStorage.setItem(volume2VarName, vol.toString());
                     this.setState({ volume2: vol });
                 }
                 else {
-                    sessionStorage.setItem(volumeVarName, vol.toString());
+                    localStorage.setItem(volumeVarName, vol.toString());
                     this.setState({ volume: vol });
                 }
             };
 
             const setVoice = (voice: IVoice, isAlt: boolean) => {
                 if (isAlt) {
-                    sessionStorage.setItem(voice2VarName, voice.name);
+                    localStorage.setItem(voice2VarName, voice.name);
                     this.setState({ voice2: voice });
                 }
                 else {
-                    sessionStorage.setItem(voiceVarName, voice.name);
+                    localStorage.setItem(voiceVarName, voice.name);
                     this.setState({ voice: voice });
                 }
             };
 
             const setSplit = (useSplit: boolean) => {
-                sessionStorage.setItem(splitVarName, useSplit.toString());
+                localStorage.setItem(splitVarName, useSplit.toString());
                 this.setState({ useSplitProfile: useSplit });
             }
 
@@ -308,7 +308,7 @@ class App extends React.Component<{}, IState> {
         }
         else {
             const play = () => {
-                sessionStorage.setItem(playedBeforeVarName, 'true');
+                localStorage.setItem(playedBeforeVarName, 'true');
                 this.setState({ display: Display.Play });
             };
             const configure = () => this.setState({ display: Display.Config });
