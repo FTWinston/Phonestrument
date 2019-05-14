@@ -1,4 +1,4 @@
-import { C, Db, D, Eb, E, F, Gb, G, Ab, A, Bb, B } from './Notes';
+import { Cb, C, Cs, Db, D, Ds, Eb, E, Es, Fb, F, Fs, Gb, G, Gs, Ab, A, As, Bb, B, Bs } from './Notes';
 
 export interface IScale {
     name: string;
@@ -23,7 +23,7 @@ export const scaleTypes: IScaleType[] =
             },
             {
                 name: 'A',
-                notes: [ A, B, Db, D, E, Gb, Ab ],
+                notes: [ A, B, Cs, D, E, Fs, Gs ],
             },
             {
                 name: 'B♭',
@@ -31,11 +31,19 @@ export const scaleTypes: IScaleType[] =
             },
             {
                 name: 'B',
-                notes: [ B, Db, Eb, E, Gb, Ab, Bb ],
+                notes: [ B, Cs, Ds, E, As, Gs, As ],
+            },
+            {
+                name: 'C♭',
+                notes: [ Cb, Db, Eb, Fb, Gb, Ab, Bb ],
             },
             {
                 name: 'C',
                 notes: [ C, D, E, F, G, A, B ],
+            },
+            {
+                name: 'C♯',
+                notes: [ Cs, Ds, Es, Fs, Gs, As, Bs ],
             },
             {
                 name: 'D♭',
@@ -43,7 +51,7 @@ export const scaleTypes: IScaleType[] =
             },
             {
                 name: 'D',
-                notes: [ D, E, Gb, G, A, B, Db ],
+                notes: [ D, E, Fs, G, A, B, Cs ],
             },
             {
                 name: 'E♭',
@@ -51,19 +59,23 @@ export const scaleTypes: IScaleType[] =
             },
             {
                 name: 'E',
-                notes: [ E, Gb, Ab, A, B, Db, Eb ],
+                notes: [ E, Fs, Gs, A, B, Cs, Ds ],
             },
             {
                 name: 'F',
                 notes: [ F, G, A, Bb, C, D, E ],
             },
             {
+                name: 'F♯',
+                notes: [ Fs, Gs, As, B, Cs, Ds, Es ],
+            },
+            {
                 name: 'G♭',
-                notes: [ Gb, Ab, Bb, B, Db, Eb, F ],
+                notes: [ Gb, Ab, Bb, Cb, Db, Eb, F ],
             },
             {
                 name: 'G',
-                notes: [ G, A, B, C, D, E, Gb ],
+                notes: [ G, A, B, C, D, E, Fs ],
             },
         ]
     },
@@ -73,11 +85,15 @@ export const scaleTypes: IScaleType[] =
         scales: [
             {
                 name: 'A♭',
-                notes: [ Ab, Bb, B, Db, Eb, E, Gb ],
+                notes: [ Ab, Bb, Cb, Db, Eb, Fb, Gb ],
             },
             {
                 name: 'A',
                 notes: [ A, B, C, D, E, F, G ],
+            },
+            {
+                name: 'A♯',
+                notes: [ As, Bs, Cs, Ds, Es, Fs, Gs ],
             },
             {
                 name: 'B♭',
@@ -85,39 +101,47 @@ export const scaleTypes: IScaleType[] =
             },
             {
                 name: 'B',
-                notes: [ B, Db, D, E, Gb, G, A ],
+                notes: [ B, Cs, D, E, Fs, G, A ],
             },
             {
                 name: 'C',
                 notes: [ C, D, Eb, F, G, Ab, Bb ],
             },
             {
-                name: 'D♭',
-                notes: [ Db, Eb, E, Gb, Ab, A, B ],
+                name: 'C♯',
+                notes: [ Cs, Ds, E, Fs, Gs, A, B ],
             },
             {
                 name: 'D',
                 notes: [ D, E, F, G, A, Bb, C ],
             },
             {
+                name: 'D♯',
+                notes: [ Ds, Es, Fs, Gs, As, B, Cs ],
+            },
+            {
                 name: 'E♭',
-                notes: [ Eb, F, Gb, Ab, Bb, B, Db ],
+                notes: [ Eb, F, Gb, Ab, Bb, Cb, Db ],
             },
             {
                 name: 'E',
-                notes: [ E, Gb, G, A, B, C, D ],
+                notes: [ E, Fs, G, A, B, C, D ],
             },
             {
                 name: 'F',
                 notes: [ F, G, Ab, Bb, C, Db, Eb ],
             },
             {
-                name: 'G♭',
-                notes: [ Gb, Ab, A, B, Db, D, E ],
+                name: 'F♯',
+                notes: [ Fs, Gs, A, B, Cs, D, E ],
             },
             {
                 name: 'G',
                 notes: [ G, A, Bb, C, D, Eb, F ],
+            },
+            {
+                name: 'G♯',
+                notes: [ Gs, As, B, Cs, Ds, E, Fs ],
             },
         ]
     },
