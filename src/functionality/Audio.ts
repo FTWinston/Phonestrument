@@ -1,4 +1,3 @@
-import { INote } from "./Notes";
 import { IVoice } from "./Voices";
 
 //const AudioContext = (window as any).AudioContext || (window as any).webkitAudioContext;
