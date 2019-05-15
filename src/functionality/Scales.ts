@@ -9,6 +9,7 @@ export interface IScaleType {
     name: string;
     notesBeforeTonic: number;
     scales: IScale[];
+    signatureScaleOrder?: string[]; // From most flats to most sharps ... names of the individual scales
 }
 
 export const scaleTypes: IScaleType[] =
@@ -77,6 +78,9 @@ export const scaleTypes: IScaleType[] =
                 name: 'G',
                 notes: [ G, A, B, C, D, E, Fs ],
             },
+        ],
+        signatureScaleOrder: [
+            'C♭', 'G♭', 'D♭', 'A♭', 'E♭', 'B♭', 'F', 'C', 'G', 'D', 'A', 'E', 'B', 'F♯', 'C♯'
         ]
     },
     {
@@ -143,6 +147,9 @@ export const scaleTypes: IScaleType[] =
                 name: 'G♯',
                 notes: [ Gs, As, B, Cs, Ds, E, Fs ],
             },
+        ],
+        signatureScaleOrder: [
+            'A♭', 'E♭', 'B♭', 'F', 'C', 'G', 'D', 'A', 'E', 'B', 'F♯', 'C♯', 'G♯', 'D♯', 'A♯'
         ]
     },
     {
