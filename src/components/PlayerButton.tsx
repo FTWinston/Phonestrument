@@ -92,7 +92,7 @@ export class PlayerButton extends React.PureComponent<IProps, IState> {
             classes += ' player__button--disabled';
         }
 
-        if (this.props.type == ButtonType.Note || this.props.type == ButtonType.HighlightNote) {
+        if (this.props.type === ButtonType.Note || this.props.type === ButtonType.HighlightNote) {
             if (this.props.isLeft) {
                 classes += ' player__button--left';
             }

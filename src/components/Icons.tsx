@@ -1,3 +1,4 @@
+/* eslint import/no-webpack-loader-syntax: off */
 export const Help = require('-!svg-react-loader?name=Icon!feather-icons/dist/icons/help-circle.svg');
 export const Home = require('-!svg-react-loader?name=Icon!feather-icons/dist/icons/home.svg');
 export const Play = require('-!svg-react-loader?name=Icon!feather-icons/dist/icons/thumbs-up.svg');

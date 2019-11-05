@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { IScale, IScaleType } from '../functionality/Scales';
 import logo from './logo.svg';
 import './Home.css';
 import { Help, Play, Configure } from './Icons';
