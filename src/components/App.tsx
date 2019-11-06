@@ -169,7 +169,10 @@ class App extends React.Component<{}, IState> {
 
             const profiles: IProfile[] = [
                 {
-                    notes: determineNotes(this.state.scale, this.state.scaleType, this.state.octave),
+                    notes: [
+                        determineNotes(this.state.scale, this.state.scaleType, this.state.octave),
+                        determineNotes(this.state.scale, this.state.scaleType, this.state.octave + 1)
+                    ],
                     highlightNoteName: this.state.scale.name,
                     keyName: `${this.state.scale.name} ${this.state.scaleType.name}`,
                     volume: this.state.volume,
@@ -179,7 +182,10 @@ class App extends React.Component<{}, IState> {
 
             if (this.state.useSplitProfile) {
                 profiles.push({
-                    notes: determineNotes(this.state.scale2, this.state.scaleType2, this.state.octave2),
+                    notes: [
+                        determineNotes(this.state.scale2, this.state.scaleType2, this.state.octave2),
+                        determineNotes(this.state.scale2, this.state.scaleType2, this.state.octave2 + 1)
+                    ],
                     highlightNoteName: this.state.scale2.name,
                     keyName: `${this.state.scale2.name} ${this.state.scaleType2.name}`,
                     volume: this.state.volume2,

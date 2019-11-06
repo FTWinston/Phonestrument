@@ -113,7 +113,7 @@ export class Configuration extends React.Component<IProps, {}> {
                 />
 
                 <label className="site__useAlt">
-                    Tilt screen for alternate configuration
+                    Quickly switch to alternate configuration
                     <input
                         type="checkbox"
                         checked={this.props.useSplitProfile}

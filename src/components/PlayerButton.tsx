@@ -1,21 +1,10 @@
 import * as React from 'react';
 
-export enum ButtonType {
-    Note,
-    HighlightNote,
-}
-
 interface IProps {
     text: string;
     octave: number;
     
-    orderNum?: number;
-    type: ButtonType;
-    enabled?: boolean;
-    isLeft?: boolean;
-    isRight?: boolean;    
-    isTop?: boolean;
-
+    highlight?: boolean;
     altProfile: boolean;
 
     start: () => void;
@@ -60,9 +49,7 @@ export class PlayerButton extends React.PureComponent<IProps, IState> {
                     altProfile: this.props.altProfile,
                 });
                 
-                if (this.props.enabled !== false) {
-                    this.props.start();
-                }
+                this.props.start();
             };
 
         const touchEnd = () => {
@@ -73,9 +60,7 @@ export class PlayerButton extends React.PureComponent<IProps, IState> {
                     altProfile: this.props.altProfile,
                 });
 
-                if (this.props.enabled !== false) {
-                    this.props.stop();
-                }
+                this.props.stop();
             };
 
         let classes = 'player__button';
@@ -88,38 +73,13 @@ export class PlayerButton extends React.PureComponent<IProps, IState> {
             classes += ' player__button--altProfile';
         }
 
-        if (this.props.enabled === false) {
-            classes += ' player__button--disabled';
+        if (this.props.highlight) {
+            classes += ' player__button--highlight';
         }
-
-        if (this.props.type === ButtonType.Note || this.props.type === ButtonType.HighlightNote) {
-            if (this.props.isLeft) {
-                classes += ' player__button--left';
-            }
-            if (this.props.isRight) {
-                classes += ' player__button--right';
-            }
-            if (this.props.isTop) {
-                classes += ' player__button--top';
-            }
-        }
-
-        switch (this.props.type) {
-            case ButtonType.HighlightNote:
-                classes += ' player__button--highlight';
-                break;
-        }
-
-        const style = this.props.orderNum === undefined
-            ? undefined
-            : {
-                order: this.props.orderNum,
-            };
 
         return (
             <div
                 className={classes}
-                style={style}
                 onTouchStart={touchStart}
                 onTouchEnd={touchEnd}
                 onTouchCancel={touchEnd}
